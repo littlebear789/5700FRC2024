@@ -5,42 +5,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.TalonSRXMotors;
 
-
-public class ToggleTalons extends Command {
-
-  private TalonSRXMotors talonSRXMotors;
-  private final int button;
-  private int toggle = 0;
-
-
-  /** Creates a new SetTalonSpeed. */
-  public ToggleTalons(TalonSRXMotors talonSRXMotors, int button) {
-    this.button = button;
-    this.talonSRXMotors = talonSRXMotors;
+public class FeederCMD extends Command {
+  /** Creates a new FeederCMD. */
+  public FeederCMD() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
   }
- 
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    toggle = button;
-    if (toggle == 1){
-      talonSRXMotors.setSpeed1(1); 
-      talonSRXMotors.setSpeed2(1);
-    }
-    else{
-      talonSRXMotors.setSpeed1(0);
-      talonSRXMotors.setSpeed2(0);     
-    }
-      
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -51,6 +29,4 @@ public class ToggleTalons extends Command {
   public boolean isFinished() {
     return false;
   }
-
-
 }
