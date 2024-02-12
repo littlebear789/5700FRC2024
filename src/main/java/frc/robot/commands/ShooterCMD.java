@@ -5,54 +5,57 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-//import frc.lib.util.MathUtil;
-//import frc.robot.RobotContainer;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.TalonSRXMotors;
 
 
-public class SetIntake extends Command {
-  private Intake intake;
-  private boolean toggle;
-  //private RobotContainer robotContainer;
+public class ShooterCMD extends Command {
 
-  /** Creates a new IntakeCMD. */
-  public SetIntake(Intake intake, boolean toggle) {
+  private TalonSRXMotors talonSRXMotors;
+  private final Boolean motor;
+
+
+  /** Creates a new SetTalonSpeed. */
+  public ShooterCMD(TalonSRXMotors talonSRXMotors, Boolean motor) {
+    this.motor = motor;
+    this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.intake = intake;
-    this.toggle = toggle;
-    addRequirements(intake);
+    addRequirements(talonSRXMotors);
   }
-
+ 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.intakeDown();
-    
+    System.out.println("Shooter On");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if (toggle){
-      intake.intakeUp();
+    if (motor){
+      talonSRXMotors.setSpeed1(0.7); 
+      talonSRXMotors.setSpeed2(0.7);
+      
     }
-
     else{
-      intake.intakeDown();
-
+      talonSRXMotors.setSpeed1(0);
+      talonSRXMotors.setSpeed2(0);  
+         
     }
-   
-
+      
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    System.out.println("Shooter Off");
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
   }
+
+
 }

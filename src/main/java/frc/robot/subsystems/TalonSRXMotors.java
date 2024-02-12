@@ -14,6 +14,8 @@ public class TalonSRXMotors extends SubsystemBase {
 
   private TalonSRX motor1 = new TalonSRX(Constants.motor1ID);
   private TalonSRX motor2 = new TalonSRX(Constants.motor2ID);
+  private TalonSRX motor3 = new TalonSRX(Constants.motor3ID);
+
 
 
   /** Creates a new TalonSRXMotors. */
@@ -28,16 +30,11 @@ public class TalonSRXMotors extends SubsystemBase {
   public void setSpeed2(double speed) {
     motor2.set(ControlMode.PercentOutput,speed);
   }
-  public void setToggle(boolean toggle) {
-    if(toggle){
-    motor1.set(ControlMode.PercentOutput,1);
-    motor2.set(ControlMode.PercentOutput,1);
-    }
-    else{
-      motor1.set(ControlMode.PercentOutput,0);
-      motor2.set(ControlMode.PercentOutput,0);     
-    }    
+
+  public void setSpeed3(double speed) {
+    motor3.set(ControlMode.PercentOutput,speed);
   }
+
   
   @Override
   public void periodic() {

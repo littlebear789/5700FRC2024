@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 //import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -42,6 +42,9 @@ public class RobotContainer {
     private final Intake intake = new Intake();
     private final JoystickButton intakeToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
+    /*Shooter */
+    private final int rightTiggerAxis = XboxController.Axis.kRightTrigger.value;
+
     /*Auto Chooser */
     private final SendableChooser<Command> autoChooser;
 
@@ -50,9 +53,6 @@ public class RobotContainer {
 
     /* Motor Buttoms */
     private final TalonSRXMotors talonSRXMotors = new TalonSRXMotors();
-    private final JoystickButton motor1F = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final JoystickButton motorBT = new JoystickButton(driver, XboxController.Button.kX.value);
-    private final JoystickButton motorBT2 = new JoystickButton(driver, XboxController.Button.kY.value);
 
 
 
@@ -81,6 +81,7 @@ public class RobotContainer {
 
         // Configure the button bindings
         configureButtonBindings();
+        configureSubsystemDefaults();
 
     }
 
@@ -97,10 +98,8 @@ public class RobotContainer {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-        motor1F.whileTrue(new SetTalonSpeed(talonSRXMotors,1) );
-        motor1F.whileFalse(new SetTalonSpeed(talonSRXMotors,0) );
-        motorBT.onTrue(new ToggleTalons(talonSRXMotors,1));
-        motorBT2.onTrue(new ToggleTalons(talonSRXMotors,0) );
+
+        /* 
         new POVButton(driver, 0).whileTrue(new TurntoAngle(s_Swerve,
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis),
@@ -116,13 +115,45 @@ public class RobotContainer {
         new POVButton(driver, 180).whileTrue(new TurntoAngle(s_Swerve,
             () -> -driver.getRawAxis(translationAxis), 
             () -> -driver.getRawAxis(strafeAxis),
+            Rotation2d.fromDegrees(180))
+        );
+        */
+
+        //turn2angle with A B X Y
+        new JoystickButton(driver, XboxController.Button.kY.value).whileTrue(new TurntoAngle(s_Swerve,
+            () -> -driver.getRawAxis(translationAxis), 
+            () -> -driver.getRawAxis(strafeAxis),
+            Rotation2d.fromDegrees(0)));
+        new JoystickButton(driver, XboxController.Button.kX.value).whileTrue(new TurntoAngle(s_Swerve,
+            () -> -driver.getRawAxis(translationAxis), 
+            () -> -driver.getRawAxis(strafeAxis),
+            Rotation2d.fromDegrees(90)));
+        new JoystickButton(driver, XboxController.Button.kA.value).whileTrue(new TurntoAngle(s_Swerve,
+            () -> -driver.getRawAxis(translationAxis), 
+            () -> -driver.getRawAxis(strafeAxis),
             Rotation2d.fromDegrees(180)));
+        new JoystickButton(driver, XboxController.Button.kB.value).whileTrue(new TurntoAngle(s_Swerve,
+            () -> -driver.getRawAxis(translationAxis), 
+            () -> -driver.getRawAxis(strafeAxis),
+            Rotation2d.fromDegrees(270))
+        );
 
-        intakeToggle.onTrue(new SetIntake(intake,true));
-        intakeToggle.onFalse(new SetIntake(intake,false));
+        new POVButton(driver, 0).whileTrue(new ShooterCMD(talonSRXMotors,true) );
+        new POVButton(driver, 90).whileTrue(new FeederCMD(talonSRXMotors,true) );
+        new POVButton(driver, 180).whileTrue(new IntakeMotorCMD(intake,true) );
 
+        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterCMD(talonSRXMotors,true) );
+
+        
+        intakeToggle.whileTrue(new IntakeCMD(intake,true));
 
     }
+
+    private void configureSubsystemDefaults() {
+        intake.setDefaultCommand(new IntakeCMD(intake,false));
+    
+    }
+    
 
 
     /*
