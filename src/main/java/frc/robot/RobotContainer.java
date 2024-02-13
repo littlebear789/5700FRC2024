@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -13,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-//import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.AutoCMDs.*;
 import frc.robot.commands.Feeder.FeederCMD;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
@@ -73,13 +74,15 @@ public class RobotContainer {
         );
 
 
+        NamedCommands.registerCommand("Shooting", new ShootCMD(talonSRXMotors));
+        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake));
 
         autoChooser = AutoBuilder.buildAutoChooser();
-
         // Another option that allows you to specify the default auto by its name
-     // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
-
+        // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
         SmartDashboard.putData("Auto Chooser", autoChooser);
+
+
 
 
         // Configure the button bindings

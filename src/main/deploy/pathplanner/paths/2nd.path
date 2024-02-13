@@ -1,0 +1,58 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.949416269202909,
+        "y": 5.5430292057165325
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.4076567990292497,
+        "y": 5.619920536771064
+      },
+      "isLocked": false,
+      "linkedName": "move two 2nd"
+    },
+    {
+      "anchor": {
+        "x": 2.84837662633785,
+        "y": 7.004508422755952
+      },
+      "prevControl": {
+        "x": 2.0031119766146857,
+        "y": 6.31020021186474
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "3rd"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.55,
+      "rotationDegrees": 39.4,
+      "rotateFast": false
+    }
+  ],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 39.32697786007459,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "3rd Grab",
+  "previewStartingState": {
+    "rotation": 0,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}
