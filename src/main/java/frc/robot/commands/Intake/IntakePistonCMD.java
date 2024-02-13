@@ -2,53 +2,53 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.TalonSRXMotors;
+//import frc.lib.util.MathUtil;
+//import frc.robot.RobotContainer;
+import frc.robot.subsystems.Intake;
 
 
-public class ShooterCMD extends Command {
+public class IntakePistonCMD extends Command {
+  private Intake intake;
+  private boolean toggle;
+  //private RobotContainer robotContainer;
 
-  private TalonSRXMotors talonSRXMotors;
-  private final Boolean motor;
-
-
-  /** Creates a new SetTalonSpeed. */
-  public ShooterCMD(TalonSRXMotors talonSRXMotors, Boolean motor) {
-    this.motor = motor;
-    this.talonSRXMotors = talonSRXMotors;
+  /** Creates a new IntakeCMD. */
+  public IntakePistonCMD(Intake intake, boolean toggle) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    this.intake = intake;
+    this.toggle = toggle;
+    addRequirements(intake);
   }
- 
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Shooter On");
+    System.out.println("Intake Down");
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if (motor){
-      talonSRXMotors.setSpeed1(0.7); 
-      talonSRXMotors.setSpeed2(0.7);
+    if (toggle){
+      intake.intakePistonDown();
       
-    }
-    else{
-      talonSRXMotors.setSpeed1(0);
-      talonSRXMotors.setSpeed2(0);  
-         
-    }
-      
-  }
 
+    }
+
+    else{
+      intake.intakePistonUp();
+      
+    }
+
+  }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Shooter Off");
   }
 
   // Returns true when the command should end.
@@ -56,6 +56,4 @@ public class ShooterCMD extends Command {
   public boolean isFinished() {
     return false;
   }
-
-
 }

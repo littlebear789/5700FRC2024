@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 //import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.Feeder.FeederCMD;
+import frc.robot.commands.Intake.*;
+import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -138,19 +141,22 @@ public class RobotContainer {
             Rotation2d.fromDegrees(270))
         );
 
-        new POVButton(driver, 0).whileTrue(new ShooterCMD(talonSRXMotors,true) );
+        new POVButton(driver, 0).whileTrue(new ShooterMotorOn(talonSRXMotors,true) );
         new POVButton(driver, 90).whileTrue(new FeederCMD(talonSRXMotors,true) );
         new POVButton(driver, 180).whileTrue(new IntakeMotorCMD(intake,true) );
+         new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
 
-        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterCMD(talonSRXMotors,true) );
+
+        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterCMD(talonSRXMotors) );
 
         
-        intakeToggle.whileTrue(new IntakeCMD(intake,true));
+        intakeToggle.whileTrue(new IntakeCMD(intake));
 
     }
 
     private void configureSubsystemDefaults() {
-        intake.setDefaultCommand(new IntakeCMD(intake,false));
+        intake.setDefaultCommand(new IntakeDefaultCMD(intake));
+        talonSRXMotors.setDefaultCommand(new ShooterDefaultCMD(talonSRXMotors));
     
     }
     
