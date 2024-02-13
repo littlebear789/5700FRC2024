@@ -45,6 +45,7 @@ public class RobotContainer {
     /*Intake*/
     private final Intake intake = new Intake();
     private final JoystickButton intakeToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+    private final JoystickButton intakeSmartToggle = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /*Shooter */
     private final int rightTiggerAxis = XboxController.Axis.kRightTrigger.value;
@@ -154,6 +155,7 @@ public class RobotContainer {
 
         
         intakeToggle.whileTrue(new IntakeCMD(intake));
+        intakeSmartToggle.whileTrue(new SmartIntake(intake));
 
     }
 

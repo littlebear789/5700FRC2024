@@ -29,6 +29,7 @@ public class ShootCMD extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    killed = false;
     endTime = Timer.getFPGATimestamp() + duration;
     System.out.println("Shooting");
     talonSRXMotors.setSpeed1(1); 
@@ -53,7 +54,7 @@ public class ShootCMD extends Command {
     talonSRXMotors.setSpeed1(0); 
     talonSRXMotors.setSpeed2(0);
     talonSRXMotors.setSpeed3(0);
-    killed = false;
+    
   }
 
 
