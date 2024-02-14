@@ -12,9 +12,9 @@ import frc.robot.Constants;
 
 public class TalonSRXMotors extends SubsystemBase {
 
-  private TalonSRX motor1 = new TalonSRX(Constants.motor1ID);
   private TalonSRX motor2 = new TalonSRX(Constants.motor2ID);
   private TalonSRX motor3 = new TalonSRX(Constants.motor3ID);
+  private TalonSRX motor4 = new TalonSRX(Constants.motor4ID);
 
 
 
@@ -24,15 +24,15 @@ public class TalonSRXMotors extends SubsystemBase {
   }
 
   public void setSpeed1(double speed) {
-    motor1.set(ControlMode.PercentOutput,speed);
+    motor3.set(ControlMode.PercentOutput,speed);
   }
 
   public void setSpeed2(double speed) {
-    motor2.set(ControlMode.PercentOutput,speed);
+    motor4.set(ControlMode.PercentOutput,speed);
   }
 
   public void setSpeed3(double speed) {
-    motor3.set(ControlMode.PercentOutput,speed);
+    motor2.set(ControlMode.PercentOutput,speed);
   }
 
   

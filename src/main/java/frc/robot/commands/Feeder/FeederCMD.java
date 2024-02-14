@@ -30,7 +30,7 @@ public class FeederCMD extends Command {
   public void execute() {
 
     if (motorOn){
-      talonSRXMotors.setSpeed3(0.5); 
+      talonSRXMotors.setSpeed3(1); 
       
     }
     else{

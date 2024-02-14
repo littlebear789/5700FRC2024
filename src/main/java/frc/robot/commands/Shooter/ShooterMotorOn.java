@@ -33,8 +33,8 @@ public class ShooterMotorOn extends Command {
   public void execute() {
 
     if (motor){
-      talonSRXMotors.setSpeed1(0.7); 
-      talonSRXMotors.setSpeed2(0.7);
+      talonSRXMotors.setSpeed1(1); 
+      talonSRXMotors.setSpeed2(1);
       
     }
     else{

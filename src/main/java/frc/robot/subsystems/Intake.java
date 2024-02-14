@@ -15,7 +15,7 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
   private final DoubleSolenoid intake = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,Constants.intakeOpen, Constants.intakeClose);
-  private TalonSRX motor4 = new TalonSRX(Constants.motor4ID);
+  private TalonSRX motor1 = new TalonSRX(Constants.motor1ID);
 
   
   /** Creates a new Intake. */
@@ -34,7 +34,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void intakeMotorSpeed(double speed){
-    this.motor4.set(ControlMode.PercentOutput,speed);
+    this.motor1.set(ControlMode.PercentOutput,speed);
   }
   public void intakePistonToggle(){
     this.intake.toggle();

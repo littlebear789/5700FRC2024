@@ -4,18 +4,21 @@
 
 package frc.robot.commands.Shooter;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.TalonSRXMotors;
 
 
 public class ShooterCMD extends Command {
 
+  private double feederdelay;
   private TalonSRXMotors talonSRXMotors;
 
 
 
   /** Creates a new SetTalonSpeed. */
   public ShooterCMD(TalonSRXMotors talonSRXMotors) {
+    
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(talonSRXMotors);
@@ -25,6 +28,7 @@ public class ShooterCMD extends Command {
   @Override
   public void initialize() {
     System.out.println("Shooting");
+    feederdelay = Timer.getFPGATimestamp() + 0.5;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,7 +36,9 @@ public class ShooterCMD extends Command {
   public void execute() {
     talonSRXMotors.setSpeed1(1); 
     talonSRXMotors.setSpeed2(1);
-    talonSRXMotors.setSpeed3(0.4);
+    if(Timer.getFPGATimestamp() > feederdelay){
+    talonSRXMotors.setSpeed3(1);
+    }
   }
   // Called once the command ends or is interrupted.
   @Override

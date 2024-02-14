@@ -19,8 +19,8 @@ public final class Constants {
 
     public static final int motor1ID = 14; //Test TalonSRX motor 1
     public static final int motor2ID = 15; //Test TalonSRX motor 2
-    public static final int motor3ID = 16; //Test TalonSRX motor 1
-    public static final int motor4ID = 17; //Test TalonSRX motor 2
+    public static final int motor3ID = 16; //Test TalonSRX motor 3
+    public static final int motor4ID = 17; //Test TalonSRX motor 4
 
     //Intake Pistons
     public static final int intakeOpen = 0;

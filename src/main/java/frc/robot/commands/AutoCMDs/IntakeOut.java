@@ -21,7 +21,7 @@ public class IntakeOut extends Command {
 
   /** Creates a new IntakeCMD. */
   public IntakeOut(Intake intake) {
-    this.duration = 4;
+    this.duration = 1;
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intake);

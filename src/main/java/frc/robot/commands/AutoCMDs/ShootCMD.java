@@ -20,7 +20,7 @@ public class ShootCMD extends Command {
 
   /** Creates a new SetTalonSpeed. */
   public ShootCMD(TalonSRXMotors talonSRXMotors) {
-    this.duration = 5;
+    this.duration = 0.5;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(talonSRXMotors);
@@ -32,9 +32,6 @@ public class ShootCMD extends Command {
     killed = false;
     endTime = Timer.getFPGATimestamp() + duration;
     System.out.println("Shooting");
-    talonSRXMotors.setSpeed1(1); 
-    talonSRXMotors.setSpeed2(1);
-    talonSRXMotors.setSpeed3(0.4);
     
 
   }
@@ -42,6 +39,9 @@ public class ShootCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    talonSRXMotors.setSpeed1(1); 
+    talonSRXMotors.setSpeed2(1);
+    talonSRXMotors.setSpeed3(1);
 
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;
