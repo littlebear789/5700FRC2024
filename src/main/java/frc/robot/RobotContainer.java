@@ -74,22 +74,18 @@ public class RobotContainer {
             )
         );
 
-
-        NamedCommands.registerCommand("Shooting", new ShootCMD(talonSRXMotors));
-        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake));
-
-        autoChooser = AutoBuilder.buildAutoChooser();
-        // Another option that allows you to specify the default auto by its name
-        // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
-        SmartDashboard.putData("Auto Chooser", autoChooser);
-
-
-
-
         // Configure the button bindings
         configureButtonBindings();
         configureSubsystemDefaults();
 
+        //PP Auto Commands
+        NamedCommands.registerCommand("Shooting", new ShootCMD(talonSRXMotors));
+        NamedCommands.registerCommand("Fire", new FireCMD(talonSRXMotors));
+        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake));
+
+        //Auto Chooser
+        autoChooser = AutoBuilder.buildAutoChooser("New Auto");
+        SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
 
@@ -104,27 +100,6 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-
-
-        /* 
-        new POVButton(driver, 0).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(0)));
-        new POVButton(driver, 90).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(270)));
-        new POVButton(driver, 270).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(90)));
-        new POVButton(driver, 180).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(180))
-        );
-        */
 
         //turn2angle with A B X Y
         new JoystickButton(driver, XboxController.Button.kY.value).whileTrue(new TurntoAngle(s_Swerve,
@@ -148,7 +123,7 @@ public class RobotContainer {
         new POVButton(driver, 0).whileTrue(new ShooterMotorOn(talonSRXMotors,true) );
         new POVButton(driver, 90).whileTrue(new FeederCMD(talonSRXMotors,true) );
         new POVButton(driver, 180).whileTrue(new IntakeMotorCMD(intake,true) );
-         new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
+        new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
 
 
         new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterCMD(talonSRXMotors) );
@@ -165,18 +140,6 @@ public class RobotContainer {
     
     }
     
-
-
-    /*
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     
-    public Command getAutonomousCommand() {
-        // An ExampleCommand will run in autonomous
-        return new exampleAuto(s_Swerve);
-    }
-    */
 
     /*For AutoBuilder */
      public Command getAutonomousCommand() {

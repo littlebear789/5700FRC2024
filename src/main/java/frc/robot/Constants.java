@@ -4,7 +4,6 @@ package frc.robot;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -17,11 +16,10 @@ public final class Constants {
     
     //TalonSRX motors
 
-    public static final int motor1ID = 14; //Test TalonSRX motor 1
-    public static final int motor2ID = 15; //Test TalonSRX motor 2
-    public static final int motor3ID = 16; //Test TalonSRX motor 3
-    public static final int motor4ID = 17; //Test TalonSRX motor 4
-
+    public static final int motor1ID = 14; //Test TalonSRX motor 1 intake
+    public static final int motor2ID = 15; //Test TalonSRX motor 2 feeder
+    public static final int motor3ID = 16; //Test TalonSRX motor 3 shooter
+    public static final int motor4ID = 17; //Test TalonSRX motor 4 shooter
     //Intake Pistons
     public static final int intakeOpen = 0;
     public static final int intakeClose = 1;
@@ -97,9 +95,9 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 5; //This must be tuned to specific robot default 4.5
+        public static final double maxSpeed = 4.5; //This must be tuned to specific robot default 4.5
         /** Radians per Second */
-        public static final double maxAngularVelocity = 8; //This must be tuned to specific robot default 10
+        public static final double maxAngularVelocity = 10; //This must be tuned to specific robot default 10
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -162,4 +160,6 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     }
+    
+    
 }

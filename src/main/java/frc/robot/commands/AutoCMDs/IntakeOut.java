@@ -42,13 +42,14 @@ public class IntakeOut extends Command {
   @Override
   public void execute() {
 
-        if(Timer.getFPGATimestamp() > endTime){
+    if(Timer.getFPGATimestamp() > endTime){
       killed = true;
     }
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("Intake Up");
     
   }
 

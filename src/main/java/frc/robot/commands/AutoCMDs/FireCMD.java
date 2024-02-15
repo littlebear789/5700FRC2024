@@ -9,7 +9,7 @@ import frc.robot.subsystems.TalonSRXMotors;
 import edu.wpi.first.wpilibj.Timer;
 
 
-public class ShootCMD extends Command {
+public class FireCMD extends Command {
 	private final double duration;
   private TalonSRXMotors talonSRXMotors;
 	private double endTime;
@@ -19,7 +19,7 @@ public class ShootCMD extends Command {
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShootCMD(TalonSRXMotors talonSRXMotors) {
+  public FireCMD(TalonSRXMotors talonSRXMotors) {
     this.duration = 0.5;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,7 +31,7 @@ public class ShootCMD extends Command {
   public void initialize() {
     killed = false;
     endTime = Timer.getFPGATimestamp() + duration;
-    System.out.println("Shooter On");
+    System.out.println("Fire");
     
 
   }
@@ -41,7 +41,7 @@ public class ShootCMD extends Command {
   public void execute() {
     talonSRXMotors.setSpeed1(1); 
     talonSRXMotors.setSpeed2(1);
-
+    talonSRXMotors.setSpeed3(1);
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;
     }
@@ -49,9 +49,10 @@ public class ShootCMD extends Command {
   }
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Shoot");
+    System.out.println("Note Shoot"); 
     talonSRXMotors.setSpeed1(0); 
     talonSRXMotors.setSpeed2(0);
+    talonSRXMotors.setSpeed3(0);
     
   }
 
