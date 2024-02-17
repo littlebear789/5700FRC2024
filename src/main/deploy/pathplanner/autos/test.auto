@@ -14,13 +14,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Shooting"
+            "name": "ShootCMD"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Fire"
+            "name": "FireCMD"
           }
         },
         {
@@ -32,13 +32,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Shooting"
+            "name": "ShootCMD"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Fire"
+            "name": "FireCMD"
           }
         }
       ]

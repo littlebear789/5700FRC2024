@@ -29,6 +29,8 @@ public class IntakeCMD extends Command {
     intake.intakeMotorSpeed(1);
     System.out.println("Intake Down, Full Speed");
     
+
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,6 +40,7 @@ public class IntakeCMD extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
   }
 
   // Returns true when the command should end.

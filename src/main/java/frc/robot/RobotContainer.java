@@ -4,11 +4,13 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -43,27 +45,36 @@ public class RobotContainer {
     //private final JoystickButton robotReset = new JoystickButton(driver, XboxController.Button.kRightStick.value);
 
     /*Intake*/
-    private final Intake intake = new Intake();
     private final JoystickButton intakeToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     private final JoystickButton intakeSmartToggle = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /*Shooter */
     private final int rightTiggerAxis = XboxController.Axis.kRightTrigger.value;
+    private final int leftTiggerAxis = XboxController.Axis.kLeftTrigger.value;
 
     /*Auto Chooser */
     private final SendableChooser<Command> autoChooser;
 
     /* Subsystems */
+    private final LED led = new LED();
+    private final Shooter shooter = new Shooter();
     private final Swerve s_Swerve = new Swerve();
-
-    /* Motor Buttoms */
     private final TalonSRXMotors talonSRXMotors = new TalonSRXMotors();
+    private final Intake intake = new Intake();
 
 
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
+        //PP Auto Commands
+        NamedCommands.registerCommand("ShootCMD", new ShootCMD(talonSRXMotors));
+        NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors));
+        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake));
+        NamedCommands.registerCommand("StopDrive", new StopDrive(s_Swerve));
+
+        //Swerve
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -78,10 +89,7 @@ public class RobotContainer {
         configureButtonBindings();
         configureSubsystemDefaults();
 
-        //PP Auto Commands
-        NamedCommands.registerCommand("Shooting", new ShootCMD(talonSRXMotors));
-        NamedCommands.registerCommand("Fire", new FireCMD(talonSRXMotors));
-        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake));
+
 
         //Auto Chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto");
@@ -126,20 +134,45 @@ public class RobotContainer {
         new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
 
 
-        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterCMD(talonSRXMotors) );
+        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
+        new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .5).whileTrue(new ShooterLowCMD(talonSRXMotors,shooter) );
+       // new Trigger(() -> talonSRXMotors.getFeederBeamBreak() == true).whileTrue(new SmartIntake(intake,talonSRXMotors));
+
+        intakeToggle.whileTrue(new IntakeCMD(intake));
+        intakeSmartToggle.whileTrue(new SmartIntake(intake,talonSRXMotors));
+        
+
 
         
-        intakeToggle.whileTrue(new IntakeCMD(intake));
-        intakeSmartToggle.whileTrue(new SmartIntake(intake));
 
     }
 
     private void configureSubsystemDefaults() {
         intake.setDefaultCommand(new IntakeDefaultCMD(intake));
-        talonSRXMotors.setDefaultCommand(new ShooterDefaultCMD(talonSRXMotors));
+        talonSRXMotors.setDefaultCommand(new ShooterDefaultCMD(talonSRXMotors,shooter));
     
     }
-    
+
+
+    public void setLEDs() {
+        if (DriverStation.isDisabled()) {
+            led.rainbow();
+        } 
+        else {
+            if (SmartDashboard.getBoolean("Intaking", false)) {
+                led.setAllBlink(Color.kGreen, 1.0);
+                //System.out.println("Green");
+            }
+            else if(SmartDashboard.getBoolean("Note Got", false)){
+                    led.setAll(Color.kGreen);
+                    //System.out.println("Solid Green");
+            }
+            else {
+            led.setAll(Color.kCyan);
+            //System.out.println("Cyan");
+            } 
+        }
+    }
 
     /*For AutoBuilder */
      public Command getAutonomousCommand() {

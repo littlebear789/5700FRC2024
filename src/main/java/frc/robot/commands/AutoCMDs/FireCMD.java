@@ -20,7 +20,7 @@ public class FireCMD extends Command {
 
   /** Creates a new SetTalonSpeed. */
   public FireCMD(TalonSRXMotors talonSRXMotors) {
-    this.duration = 0.5;
+    this.duration = 0.75;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(talonSRXMotors);
@@ -39,9 +39,8 @@ public class FireCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSRXMotors.setSpeed1(1); 
-    talonSRXMotors.setSpeed2(1);
-    talonSRXMotors.setSpeed3(1);
+    talonSRXMotors.setShooterSpeed(1);
+    talonSRXMotors.setSpeedFeeder(1);
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;
     }
@@ -49,11 +48,10 @@ public class FireCMD extends Command {
   }
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Note Shoot"); 
-    talonSRXMotors.setSpeed1(0); 
-    talonSRXMotors.setSpeed2(0);
-    talonSRXMotors.setSpeed3(0);
-    
+    System.out.println("Note Shot"); 
+    System.out.println("Shooter Off, Feeder Off"); 
+    talonSRXMotors.setShooterSpeed(0);
+    talonSRXMotors.setSpeedFeeder(0);
   }
 
 

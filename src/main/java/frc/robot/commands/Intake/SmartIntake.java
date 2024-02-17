@@ -4,25 +4,29 @@
 
 package frc.robot.commands.Intake;
 
+import java.util.function.BooleanSupplier;
+
+import edu.wpi.first.networktables.BooleanSubscriber;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.lib.util.BeamBreak;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.TalonSRXMotors;
+
 
 
 public class SmartIntake extends Command {
-  private boolean killed = false;
   private Intake intake;
-  private final BeamBreak feederBeamBreak;
+  private TalonSRXMotors talonSRXMotors;
+  private boolean killed = false;
+  //private Boolean beambreak;
 
-  //private RobotContainer robotContainer;
 
   /** Creates a new IntakeCMD. */
-  public SmartIntake(Intake intake) {
-
-    this.feederBeamBreak = new BeamBreak(0);
+  public SmartIntake(Intake intake, TalonSRXMotors talonSRXMotors) {
     this.intake = intake;
+    this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
+    addRequirements(intake,talonSRXMotors);
   }
 
   // Called when the command is initially scheduled.
@@ -31,21 +35,29 @@ public class SmartIntake extends Command {
     killed = false;
     intake.intakePistonDown();
     intake.intakeMotorSpeed(1);
-    System.out.println("Intake Down, Full Speed");
-    
+    talonSRXMotors.setSpeedFeeder(1);
+    System.out.println("Intake Down, Full Speed, No Note");
+    SmartDashboard.putBoolean("Intaking", true);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(feederBeamBreak.get()){
-      killed = true;
-    }
+    if(talonSRXMotors.getFeederBeamBreak()){
 
+      intake.intakeMotorSpeed(0);
+      talonSRXMotors.setSpeedFeeder(0);
+    }
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    talonSRXMotors.setSpeedFeeder(0);
+    intake.intakeMotorSpeed(0);
+    System.out.println("Note Intaked");
+    SmartDashboard.putBoolean("Intaking", false);
+
   }
 
   // Returns true when the command should end.

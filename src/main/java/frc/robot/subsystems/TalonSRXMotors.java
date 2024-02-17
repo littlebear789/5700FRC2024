@@ -8,20 +8,26 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import frc.robot.Constants;
 
 public class TalonSRXMotors extends SubsystemBase {
 
-  private TalonSRX motor2 = new TalonSRX(Constants.motor2ID);
-  private TalonSRX motor3 = new TalonSRX(Constants.motor3ID);
-  private TalonSRX motor4 = new TalonSRX(Constants.motor4ID);
+  private TalonSRX motor2 = new TalonSRX(Constants.motor2ID);// feeder conveyor motor
+  private TalonSRX motor3 = new TalonSRX(Constants.motor3ID); //shooter motor
+  private TalonSRX motor4 = new TalonSRX(Constants.motor4ID); //shooter motor
 
+  //private final BeamBreak feederBeamBreak;
+  private DigitalInput feederBeamBreak;
 
 
   /** Creates a new TalonSRXMotors. */
   public TalonSRXMotors() {
-    
+    feederBeamBreak = new DigitalInput(0);
+
   }
+
 
   public void setSpeed1(double speed) {
     motor3.set(ControlMode.PercentOutput,speed);
@@ -31,10 +37,18 @@ public class TalonSRXMotors extends SubsystemBase {
     motor4.set(ControlMode.PercentOutput,speed);
   }
 
-  public void setSpeed3(double speed) {
-    motor2.set(ControlMode.PercentOutput,speed);
+  public void setShooterSpeed(double speed){
+    motor3.set(ControlMode.PercentOutput,speed);
+    motor4.set(ControlMode.PercentOutput,speed);
   }
 
+  public void setSpeedFeeder(double speed) {
+    motor2.set(ControlMode.PercentOutput,speed);
+  }
+  
+  public boolean getFeederBeamBreak() {
+    return !feederBeamBreak.get();
+  }
   
   @Override
   public void periodic() {

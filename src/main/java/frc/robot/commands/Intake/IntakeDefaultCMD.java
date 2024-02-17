@@ -25,7 +25,7 @@ public class IntakeDefaultCMD extends Command {
   @Override
   public void initialize() {
     intake.intakePistonUp();
-    intake.intakeMotorSpeed(-0.1);
+    intake.intakeMotorSpeed(0);
     System.out.println("Intake Up, Slow Reverse");
     
   }

@@ -5,34 +5,37 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TalonSRXMotors;
 
 
 public class ShooterDefaultCMD extends Command {
 
   private TalonSRXMotors talonSRXMotors;
+  private Shooter shooter;
 
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterDefaultCMD(TalonSRXMotors talonSRXMotors) {
+  public ShooterDefaultCMD(TalonSRXMotors talonSRXMotors, Shooter shooter) {
     this.talonSRXMotors = talonSRXMotors;
+    this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(talonSRXMotors,shooter);
   }
  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Shooter Off, Feeder Off");
+    System.out.println("Shooter Off, Shooter Down, Feeder Off");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSRXMotors.setSpeed1(0);
-    talonSRXMotors.setSpeed2(0);  
-    talonSRXMotors.setSpeed3(0);
+    talonSRXMotors.setShooterSpeed(0);  
+    talonSRXMotors.setSpeedFeeder(0);
+    shooter.shooterPistonDown();
   }
 
   // Called once the command ends or is interrupted.
