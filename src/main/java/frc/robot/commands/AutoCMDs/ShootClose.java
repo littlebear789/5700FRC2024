@@ -2,59 +2,64 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Shooter;
+package frc.robot.commands.AutoCMDs;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.TalonSRXMotors;
+
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.TalonSRXMotors;
-import frc.robot.subsystems.Shooter;
 
 
-public class ShooterFarCMD extends Command {
-
-  private double feederdelay;
+public class ShootClose extends Command {
+	private final double duration;
   private TalonSRXMotors talonSRXMotors;
+	private double endTime;
+	private boolean killed = false;
   private Shooter shooter;
 
 
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterFarCMD(TalonSRXMotors talonSRXMotors,Shooter shooter) {
-    
+  public ShootClose(TalonSRXMotors talonSRXMotors,Shooter shooter) {
+    this.duration = 0.5;
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(talonSRXMotors,shooter);
   }
  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Shooting Far");
-    shooter.shooterPistonDown();
-    feederdelay = Timer.getFPGATimestamp() + 0.69;
+    killed = false;
+    endTime = Timer.getFPGATimestamp() + duration;
+    System.out.println("Shooter Close On");
+    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSRXMotors.setShooterSpeed(1);
-    if(Timer.getFPGATimestamp() > feederdelay){
-    talonSRXMotors.setSpeedFeeder(1);
+    talonSRXMotors.setShooterSpeed(1); 
+    shooter.shooterPistonUp();
+    if(Timer.getFPGATimestamp() > endTime){
+      killed = true;
     }
+
   }
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Shooting Release");
+
   }
 
-  // Returns true when the command should end.
+
   @Override
   public boolean isFinished() {
-    return false;
+    return killed;
   }
-
 
 }

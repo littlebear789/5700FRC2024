@@ -3,7 +3,6 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -45,8 +44,8 @@ public class RobotContainer {
     //private final JoystickButton robotReset = new JoystickButton(driver, XboxController.Button.kRightStick.value);
 
     /*Intake*/
-    private final JoystickButton intakeToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
-    private final JoystickButton intakeSmartToggle = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton intakeToggle = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton intakeSmartToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /*Shooter */
     private final int rightTiggerAxis = XboxController.Axis.kRightTrigger.value;
@@ -70,9 +69,11 @@ public class RobotContainer {
 
         //PP Auto Commands
         NamedCommands.registerCommand("ShootCMD", new ShootCMD(talonSRXMotors));
-        NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors));
-        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake));
+        NamedCommands.registerCommand("ShootClose", new ShootClose(talonSRXMotors,shooter));
+        NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors,shooter));
+        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake,talonSRXMotors));
         NamedCommands.registerCommand("StopDrive", new StopDrive(s_Swerve));
+        NamedCommands.registerCommand("SmartAutoIntake", new SmartAutoIntake(intake,talonSRXMotors));
 
         //Swerve
         s_Swerve.setDefaultCommand(
@@ -110,41 +111,36 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
         //turn2angle with A B X Y
-        new JoystickButton(driver, XboxController.Button.kY.value).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(0)));
-        new JoystickButton(driver, XboxController.Button.kX.value).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(90)));
-        new JoystickButton(driver, XboxController.Button.kA.value).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(180)));
-        new JoystickButton(driver, XboxController.Button.kB.value).whileTrue(new TurntoAngle(s_Swerve,
-            () -> -driver.getRawAxis(translationAxis), 
-            () -> -driver.getRawAxis(strafeAxis),
-            Rotation2d.fromDegrees(270))
+        new JoystickButton(driver, XboxController.Button.kY.value).onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.forwardHold)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
+        );
+        new JoystickButton(driver, XboxController.Button.kA.value).onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
+        );
+        new JoystickButton(driver, XboxController.Button.kX.value).onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.leftHold)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
+        );
+        new JoystickButton(driver, XboxController.Button.kB.value).onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.rightHold)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
         );
 
-        new POVButton(driver, 0).whileTrue(new ShooterMotorOn(talonSRXMotors,true) );
-        new POVButton(driver, 90).whileTrue(new FeederCMD(talonSRXMotors,true) );
-        new POVButton(driver, 180).whileTrue(new IntakeMotorCMD(intake,true) );
+        new POVButton(driver, 0).whileTrue(new FeederCMD(talonSRXMotors,-1) );
+        new POVButton(driver, 90).whileTrue(new FeederCMD(talonSRXMotors,1));
+        new POVButton(driver, 180).whileTrue(new IntakeMotorCMD(intake,-1));
         new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
 
 
         new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
-        new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .5).whileTrue(new ShooterLowCMD(talonSRXMotors,shooter) );
+        new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .5).whileTrue(new ShooterCloseCMD(talonSRXMotors,shooter) );
        // new Trigger(() -> talonSRXMotors.getFeederBeamBreak() == true).whileTrue(new SmartIntake(intake,talonSRXMotors));
 
         intakeToggle.whileTrue(new IntakeCMD(intake));
         intakeSmartToggle.whileTrue(new SmartIntake(intake,talonSRXMotors));
-        
-
-
-        
-
+    
     }
 
     private void configureSubsystemDefaults() {

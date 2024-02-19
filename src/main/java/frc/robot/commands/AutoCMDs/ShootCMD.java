@@ -50,7 +50,6 @@ public class ShootCMD extends Command {
   }
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Shoot");
     
   }
 

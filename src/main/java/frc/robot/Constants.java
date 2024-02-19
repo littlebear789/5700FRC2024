@@ -11,6 +11,7 @@ import com.pathplanner.lib.util.ReplanningConfig;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 //import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSTalonFXSwerveConstants;
@@ -25,13 +26,10 @@ public final class Constants {
     public static final int motor3ID = 16; //Test TalonSRX motor 3 shooter
     public static final int motor4ID = 17; //Test TalonSRX motor 4 shooter
     //Intake Pistons
-    public static final int intakeOpen = 0;
-    public static final int intakeClose = 1;
-    public static final int shooterUp = 2;
-    public static final int shooterDown = 3;
-    
-
-
+    public static final int intakeOpen = 2;
+    public static final int intakeClose = 3;
+    public static final int shooterUp = 0;
+    public static final int shooterDown = 1;
     
 
 
@@ -96,6 +94,13 @@ public final class Constants {
         public static final double driveKD = 0.05;
         public static final double driveKF = 0.05;
 
+        /* Heading PID Values */
+        public static final double HeadingKP = 3;
+        public static final double HeadingKI = 0.05;
+        public static final double HeadingKD = 0.03;
+        public static final double HeadingTolerence = 0;
+ 
+
         /* Drive Motor Characterization Values From SYSID */
         public static final double driveKS = 0.32; //This must be tuned to specific robot
         public static final double driveKV = 1.51;
@@ -105,7 +110,7 @@ public final class Constants {
         /** Meters per Second */
         public static final double maxSpeed = 4.5; //This must be tuned to specific robot default 4.5
         /** Radians per Second */
-        public static final double maxAngularVelocity = 10; //This must be tuned to specific robot default 10
+        public static final double maxAngularVelocity = 3; //This must be tuned to specific robot default 10
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -153,8 +158,8 @@ public final class Constants {
         }
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
-        new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
-        new PIDConstants(5.0, 0.0, 0.0), // Rotation PID constants
+        new PIDConstants(3, 0.05, 0.05), // Translation PID constants
+        new PIDConstants(2.5, 0.0, 0.0), // Rotation PID constants
         4.5, // Max module speed, in m/s
         0.4, // Drive base radius in meters. Distance from robot center to furthest module.
         new ReplanningConfig() // Default path replanning config. See the API for the options here
@@ -164,7 +169,7 @@ public final class Constants {
 
 
 
-    /*    public static final class AutoConstants { //The below constants are used in the example auto, and must be tuned to specific robot
+    public static final class AutoConstants { //The below constants are used in the example auto, and must be tuned to specific robot
         public static final double kMaxSpeedMetersPerSecond = 3;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
@@ -179,7 +184,7 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
     } 
-    */
+    
     
 
 }

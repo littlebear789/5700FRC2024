@@ -30,8 +30,6 @@ public class Swerve extends SubsystemBase {
     public Pigeon2 gyro;
     private Field2d field = new Field2d();
 
-    private static Swerve instance; //for turn2angle
-
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
         gyro.getConfigurator().apply(new Pigeon2Configuration());
@@ -167,13 +165,9 @@ public class Swerve extends SubsystemBase {
 
     public void driveFieldRelative(ChassisSpeeds fieldRelativeSpeeds) {
         driveRobotRelative(ChassisSpeeds.fromFieldRelativeSpeeds(fieldRelativeSpeeds, getPose().getRotation()));
-      }
+    }
 
 
-    /*For turn2angle */
-    public static Swerve getInstance() {
-		return instance = instance == null ? new Swerve() : instance;
-	}
 
     @Override
     public void periodic(){

@@ -5,6 +5,7 @@
 package frc.robot.commands.AutoCMDs;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TalonSRXMotors;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class FireCMD extends Command {
 	private final double duration;
   private TalonSRXMotors talonSRXMotors;
+  private Shooter shooter;
 	private double endTime;
 	private boolean killed = false;
 
@@ -19,11 +21,12 @@ public class FireCMD extends Command {
 
 
   /** Creates a new SetTalonSpeed. */
-  public FireCMD(TalonSRXMotors talonSRXMotors) {
-    this.duration = 0.75;
+  public FireCMD(TalonSRXMotors talonSRXMotors, Shooter shooter) {
+    this.duration = 0.5;
     this.talonSRXMotors = talonSRXMotors;
+    this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(talonSRXMotors, shooter);
   }
  
   // Called when the command is initially scheduled.
@@ -49,9 +52,10 @@ public class FireCMD extends Command {
   @Override
   public void end(boolean interrupted) {
     System.out.println("Note Shot"); 
-    System.out.println("Shooter Off, Feeder Off"); 
+    System.out.println("Shooter Off, Feeder Off, Shooter Down"); 
     talonSRXMotors.setShooterSpeed(0);
     talonSRXMotors.setSpeedFeeder(0);
+    //shooter.shooterPistonDown();
   }
 
 

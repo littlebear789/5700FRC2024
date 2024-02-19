@@ -25,7 +25,6 @@ public class TalonSRXMotors extends SubsystemBase {
   /** Creates a new TalonSRXMotors. */
   public TalonSRXMotors() {
     feederBeamBreak = new DigitalInput(0);
-
   }
 
 

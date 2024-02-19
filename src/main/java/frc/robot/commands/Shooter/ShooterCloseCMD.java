@@ -10,7 +10,7 @@ import frc.robot.subsystems.TalonSRXMotors;
 import frc.robot.subsystems.Shooter;
 
 
-public class ShooterLowCMD extends Command {
+public class ShooterCloseCMD extends Command {
 
   private double feederdelay;
   private TalonSRXMotors talonSRXMotors;
@@ -20,7 +20,7 @@ public class ShooterLowCMD extends Command {
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterLowCMD(TalonSRXMotors talonSRXMotors,Shooter shooter) {
+  public ShooterCloseCMD(TalonSRXMotors talonSRXMotors,Shooter shooter) {
     
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
@@ -33,7 +33,7 @@ public class ShooterLowCMD extends Command {
   public void initialize() {
     System.out.println("Shooting Speaker");
     shooter.shooterPistonUp();
-    feederdelay = Timer.getFPGATimestamp() + 0.5;
+    feederdelay = Timer.getFPGATimestamp() + 1.5;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

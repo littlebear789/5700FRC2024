@@ -21,6 +21,7 @@ public class Intake extends SubsystemBase {
   public Intake() {
     
   }
+  
   public void intakePistonUp(){
     this.intake.set(DoubleSolenoid.Value.kForward);
     

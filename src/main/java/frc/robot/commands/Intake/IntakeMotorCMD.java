@@ -8,14 +8,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
 
 
+
 public class IntakeMotorCMD extends Command {
 
   private Intake intake;
-  private final Boolean motorOn;
+  private final int motorOn;
 
 
   /** Creates a new SetTalonSpeed. */
-  public IntakeMotorCMD(Intake intake, Boolean motorOn) {
+  public IntakeMotorCMD(Intake intake, int motorOn) {
     this.motorOn = motorOn;
     this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -32,15 +33,14 @@ public class IntakeMotorCMD extends Command {
   @Override
   public void execute() {
 
-    if (motorOn){
-      intake.intakeMotorSpeed(1); 
-      
-    }
-    else{
-      intake.intakeMotorSpeed(0);  
-      
-    }
-      
+    if(motorOn == 1){
+      System.out.println("Intake Forward");
+    } else if(motorOn == -1) {
+      System.out.println("Intake Reverse"); 
+    } 
+
+    intake.intakeMotorSpeed(motorOn); 
+
   }
 
   // Called once the command ends or is interrupted.
@@ -54,6 +54,5 @@ public class IntakeMotorCMD extends Command {
   public boolean isFinished() {
     return false;
   }
-
 
 }

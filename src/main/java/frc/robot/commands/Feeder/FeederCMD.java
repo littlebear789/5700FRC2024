@@ -10,9 +10,9 @@ import frc.robot.subsystems.TalonSRXMotors;
 public class FeederCMD extends Command {
 
   private TalonSRXMotors talonSRXMotors;
-  private final Boolean motorOn;
+  private final int motorOn;
   /** Creates a new FeederCMD. */
-  public FeederCMD(TalonSRXMotors talonSRXMotors, Boolean motorOn) {
+  public FeederCMD(TalonSRXMotors talonSRXMotors, int motorOn) {
     this.motorOn = motorOn;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,14 +29,12 @@ public class FeederCMD extends Command {
   @Override
   public void execute() {
 
-    if (motorOn){
-      talonSRXMotors.setSpeedFeeder(1); 
-      
+    if(motorOn == 1){
+      System.out.println("feeder Forward");
+    } else if(motorOn == -1) {
+      System.out.println("feeder Reverse"); 
     }
-    else{
-      talonSRXMotors.setSpeedFeeder(0);  
-      
-    }
+    talonSRXMotors.setSpeedFeeder(motorOn); 
       
   }
 

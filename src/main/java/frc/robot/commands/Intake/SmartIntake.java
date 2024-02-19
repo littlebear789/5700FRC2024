@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Intake;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
@@ -15,6 +16,8 @@ public class SmartIntake extends Command {
   private Intake intake;
   private TalonSRXMotors talonSRXMotors;
   private boolean killed = false;
+  private boolean reverse = false;
+  private double reversedelay;
   //private Boolean beambreak;
 
 
@@ -30,9 +33,11 @@ public class SmartIntake extends Command {
   @Override
   public void initialize() {
     killed = false;
+    reverse = false;
     intake.intakePistonDown();
     intake.intakeMotorSpeed(1);
-    talonSRXMotors.setSpeedFeeder(1);
+    talonSRXMotors.setSpeedFeeder(0.75);
+    //reversedelay = Timer.getFPGATimestamp();
     System.out.println("Intake Down, Full Speed, No Note");
     SmartDashboard.putBoolean("Intaking", true);
 
@@ -41,10 +46,20 @@ public class SmartIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(talonSRXMotors.getFeederBeamBreak()){
-
-      intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0);
+    if(reverse == false){
+     if(talonSRXMotors.getFeederBeamBreak()){
+        intake.intakeMotorSpeed(0);
+        talonSRXMotors.setSpeedFeeder(-0.4);
+        reversedelay = Timer.getFPGATimestamp() + 0.05;
+        System.out.println("Note Intaked");
+        SmartDashboard.putBoolean("Note Got", true);
+        reverse = true;
+      }
+    }
+    if(reverse){
+      if(Timer.getFPGATimestamp() > reversedelay){
+        talonSRXMotors.setSpeedFeeder(0);
+      }
     }
   }
   // Called once the command ends or is interrupted.
@@ -52,7 +67,6 @@ public class SmartIntake extends Command {
   public void end(boolean interrupted) {
     talonSRXMotors.setSpeedFeeder(0);
     intake.intakeMotorSpeed(0);
-    System.out.println("Note Intaked");
     SmartDashboard.putBoolean("Intaking", false);
 
   }
