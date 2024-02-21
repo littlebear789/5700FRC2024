@@ -30,7 +30,7 @@ public class ShooterDefaultCMD extends Command {
   public void initialize() {
     talonSRXMotors.setShooterSpeed(0);  
     talonSRXMotors.setSpeedFeeder(0);
-    shooter.shooterPistonDown();
+    shooter.shooterPistonUp();
     System.out.println("Shooter Default");
   }
 

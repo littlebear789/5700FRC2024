@@ -48,12 +48,12 @@
     },
     {
       "anchor": {
-        "x": 2.684823632557015,
-        "y": 4.035175017999776
+        "x": 2.670343626401539,
+        "y": 4.3245400776515845
       },
       "prevControl": {
-        "x": 1.5695060450016431,
-        "y": 4.280060525933927
+        "x": 1.5550260388461672,
+        "y": 4.569425585585736
       },
       "nextControl": null,
       "isLocked": false,
@@ -73,7 +73,7 @@
     },
     {
       "waypointRelativePos": 3,
-      "rotationDegrees": -38.36417128376891,
+      "rotationDegrees": -26.56505117707799,
       "rotateFast": false
     }
   ],
@@ -89,7 +89,7 @@
             {
               "type": "named",
               "data": {
-                "name": "ShootCMD"
+                "name": "ShootClose"
               }
             },
             {
@@ -170,6 +170,57 @@
           ]
         }
       }
+    },
+    {
+      "name": "IntakeOut",
+      "waypointRelativePos": 0.35,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SmartAutoIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "IntakeOut2",
+      "waypointRelativePos": 1.25,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SmartAutoIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "IntakeOut3",
+      "waypointRelativePos": 2.65,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SmartAutoIntake"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
@@ -180,7 +231,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -39.84319542193704,
+    "rotation": -27.235146699302312,
     "rotateFast": false
   },
   "reversed": false,

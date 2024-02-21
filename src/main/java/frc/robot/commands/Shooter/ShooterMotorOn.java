@@ -38,7 +38,7 @@ public class ShooterMotorOn extends Command {
     }
     else{
       talonSRXMotors.setShooterSpeed(0);
-         
+       
     }
       
   }

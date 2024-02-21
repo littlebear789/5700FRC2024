@@ -31,19 +31,19 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "sequential",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Small Test"
+                  "pathName": "2NoteFar"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "IntakeOut"
+                  "name": "SmartAutoIntake"
                 }
               }
             ]

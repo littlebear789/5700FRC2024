@@ -55,7 +55,7 @@ public class FireCMD extends Command {
     System.out.println("Shooter Off, Feeder Off, Shooter Down"); 
     talonSRXMotors.setShooterSpeed(0);
     talonSRXMotors.setSpeedFeeder(0);
-    //shooter.shooterPistonDown();
+    shooter.shooterPistonDown();
   }
 
 

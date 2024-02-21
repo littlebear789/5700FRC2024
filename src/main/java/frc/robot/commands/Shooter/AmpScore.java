@@ -4,24 +4,21 @@
 
 package frc.robot.commands.Shooter;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.TalonSRXMotors;
 import frc.robot.subsystems.Shooter;
 
 
-public class ShooterFarCMD extends Command {
+public class AmpScore extends Command {
 
-  private double feederdelay;
   private TalonSRXMotors talonSRXMotors;
   private Shooter shooter;
-  private boolean killed = false;
+
 
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterFarCMD(TalonSRXMotors talonSRXMotors,Shooter shooter) {
+  public AmpScore(TalonSRXMotors talonSRXMotors,Shooter shooter) {
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,32 +28,32 @@ public class ShooterFarCMD extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    killed = false;
-    System.out.println("Shooting Far");
-    shooter.shooterPistonDown();
-    feederdelay = Timer.getFPGATimestamp() + 1.5;
+    System.out.println("AMP");
+    shooter.shooterPistonUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonDown();
+
     talonSRXMotors.setShooterSpeed(1);
-    if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);
-    }
+    
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Shooting Release");
+    System.out.println("AMP Release");
+    talonSRXMotors.setShooterSpeed(0);
+    talonSRXMotors.setSpeedFeeder(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return killed;
+    return false;
   }
 
 
 }
+

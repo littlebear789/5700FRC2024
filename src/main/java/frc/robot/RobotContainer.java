@@ -41,15 +41,14 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kBack.value);
-    //private final JoystickButton robotReset = new JoystickButton(driver, XboxController.Button.kRightStick.value);
 
     /*Intake*/
-    private final JoystickButton intakeToggle = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton intakeSmartToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     /*Shooter */
     private final int rightTiggerAxis = XboxController.Axis.kRightTrigger.value;
     private final int leftTiggerAxis = XboxController.Axis.kLeftTrigger.value;
+    private final JoystickButton ampscore = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /*Auto Chooser */
     private final SendableChooser<Command> autoChooser;
@@ -72,7 +71,6 @@ public class RobotContainer {
         NamedCommands.registerCommand("ShootClose", new ShootClose(talonSRXMotors,shooter));
         NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors,shooter));
         NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake,talonSRXMotors));
-        NamedCommands.registerCommand("StopDrive", new StopDrive(s_Swerve));
         NamedCommands.registerCommand("SmartAutoIntake", new SmartAutoIntake(intake,talonSRXMotors));
 
         //Swerve
@@ -115,10 +113,12 @@ public class RobotContainer {
             new InstantCommand(() -> States.driveState = States.DriveStates.forwardHold)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
         );
+        /* 
         new JoystickButton(driver, XboxController.Button.kA.value).onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
         );
+        */
         new JoystickButton(driver, XboxController.Button.kX.value).onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.leftHold)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
@@ -129,22 +129,22 @@ public class RobotContainer {
         );
 
         new POVButton(driver, 0).whileTrue(new FeederCMD(talonSRXMotors,-1) );
-        new POVButton(driver, 90).whileTrue(new FeederCMD(talonSRXMotors,1));
-        new POVButton(driver, 180).whileTrue(new IntakeMotorCMD(intake,-1));
+        new POVButton(driver, 90).whileTrue(new ShooterPistonToggle(shooter));
+        //new POVButton(driver, 180).whileTrue(new ShooterPistonToggle(shooter));
         new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
-
+        
+        new JoystickButton(driver, XboxController.Button.kA.value).whileTrue(new ShooterMotorOn(talonSRXMotors,true));
 
         new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
         new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .5).whileTrue(new ShooterCloseCMD(talonSRXMotors,shooter) );
-       // new Trigger(() -> talonSRXMotors.getFeederBeamBreak() == true).whileTrue(new SmartIntake(intake,talonSRXMotors));
 
-        intakeToggle.whileTrue(new IntakeCMD(intake));
+        ampscore.whileTrue(new AmpScore(talonSRXMotors, shooter));
         intakeSmartToggle.whileTrue(new SmartIntake(intake,talonSRXMotors));
     
     }
 
     private void configureSubsystemDefaults() {
-        intake.setDefaultCommand(new IntakeDefaultCMD(intake));
+        intake.setDefaultCommand(new IntakeDefaultCMD(talonSRXMotors,intake));
         talonSRXMotors.setDefaultCommand(new ShooterDefaultCMD(talonSRXMotors,shooter));
     
     }
@@ -155,13 +155,21 @@ public class RobotContainer {
             led.rainbow();
         } 
         else {
-            if (SmartDashboard.getBoolean("Intaking", false)) {
-                led.setAllBlink(Color.kGreen, 1.0);
+            if (SmartDashboard.getBoolean("Shooting", false)) {
+                led.setAllBlink(Color.kGreen, 0.25);
+                //System.out.println("Green");
+            }
+            else if (SmartDashboard.getBoolean("Shot", false)) {
+                led.setAll(Color.kBlack);
+                //System.out.println("Green");
+            }
+            else if (SmartDashboard.getBoolean("Intaking", false)) {
+                led.setAllBlink(Color.kRed, 0.25);
                 //System.out.println("Green");
             }
             else if(SmartDashboard.getBoolean("Note Got", false)){
-                    led.setAll(Color.kGreen);
-                    //System.out.println("Solid Green");
+                led.setAll(Color.kGreen);
+                //System.out.println("Solid Green");
             }
             else {
             led.setAll(Color.kCyan);

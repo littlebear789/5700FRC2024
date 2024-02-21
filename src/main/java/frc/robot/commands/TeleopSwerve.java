@@ -23,28 +23,21 @@ public class TeleopSwerve extends Command {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
-    //private PIDController rotationController;
 
-        private final double kP = 2.5;
-	    private final double kI = 0.0;
-	    private final double kD = 0.05;
-	    Rotation2d angle = Rotation2d.fromDegrees(0);
-	    private double kMaxSpeed = 360;
-	    private double kMaxAccel = 720;
-	    private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(kMaxSpeed, kMaxAccel);
-	    private ProfiledPIDController profiledPID = new ProfiledPIDController(kP, kI, kD, constraints);
-        private double omegaDegPerSec;
+    private final double kP = 2.5;
+	private final double kI = 0.0;
+	private final double kD = 0.05;
+	Rotation2d angle = Rotation2d.fromDegrees(0);
+	private double kMaxSpeed = 360;
+	private double kMaxAccel = 720;
+	private TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(kMaxSpeed, kMaxAccel);
+	private ProfiledPIDController profiledPID = new ProfiledPIDController(kP, kI, kD, constraints);
+    private double omegaDegPerSec;
 
     public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
-        //TODO: Tune heading PID
-        /* 
-        rotationController = new PIDController(Constants.Swerve.HeadingKP, Constants.Swerve.HeadingKI, Constants.Swerve.HeadingKD );
-        rotationController.enableContinuousInput(-Math.PI, Math.PI);
-        rotationController.setTolerance(Constants.Swerve.HeadingTolerence);
-        */
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
@@ -80,7 +73,7 @@ public class TeleopSwerve extends Command {
             break;
         case leftHold:
             //heading lock - left
-            profiledPID.setGoal(90);
+            profiledPID.setGoal(45);
             omegaDegPerSec = profiledPID.calculate(s_Swerve.getPose().getRotation().getDegrees());
             rotationVal = Units.degreesToRadians(omegaDegPerSec);
             //System.out.println("left LOCK");
@@ -93,40 +86,11 @@ public class TeleopSwerve extends Command {
             //System.out.println("right LOCK");
             break;
         case standard:
-        
             //normal
             rotationVal = rotationVal * Constants.Swerve.maxAngularVelocity;
             break;
         }
-        /**
-      switch(States.driveState){
-        case forwardHold:
-            //heading lock - forward
-           rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getRadians(), Units.degreesToRadians(0));
-           //System.out.println("foward LOCK");
-            break;
-        case backwardHold:
-            //heading lock - backward
-            rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getRadians(), Units.degreesToRadians(180));
-            //System.out.println("back LOCK");
-            break;
-        case leftHold:
-            //heading lock - left
-            rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getRadians(), Units.degreesToRadians(90));
-            //System.out.println("left LOCK");
-            break;
-        case rightHold:
-            //heading lock - right
-            rotationVal = rotationController.calculate(s_Swerve.getGyroYaw().getRadians(), Units.degreesToRadians(315));
-            //System.out.println("right LOCK");
-            break;
-        case standard:
         
-            //normal
-            rotationVal = rotationVal * Constants.Swerve.maxAngularVelocity;
-            break;
-        }
-        */
       /* Drive */
       s_Swerve.drive(
         new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 

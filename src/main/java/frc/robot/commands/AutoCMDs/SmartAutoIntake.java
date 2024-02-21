@@ -18,7 +18,6 @@ public class SmartAutoIntake extends Command {
   private boolean killed = false;
   private boolean reverse = false;
   private double reversedelay;
-  //private Boolean beambreak;
 
 
   /** Creates a new IntakeCMD. */
@@ -49,7 +48,7 @@ public class SmartAutoIntake extends Command {
     if(reverse == false){
      if(talonSRXMotors.getFeederBeamBreak()){
         intake.intakeMotorSpeed(0);
-        talonSRXMotors.setSpeedFeeder(-0.4);
+        talonSRXMotors.setSpeedFeeder(-0.25);
         reversedelay = Timer.getFPGATimestamp() + 0.05;
         System.out.println("Note Intaked");
         SmartDashboard.putBoolean("Note Got", true);

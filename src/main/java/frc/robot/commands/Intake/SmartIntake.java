@@ -49,8 +49,8 @@ public class SmartIntake extends Command {
     if(reverse == false){
      if(talonSRXMotors.getFeederBeamBreak()){
         intake.intakeMotorSpeed(0);
-        talonSRXMotors.setSpeedFeeder(-0.4);
-        reversedelay = Timer.getFPGATimestamp() + 0.05;
+        talonSRXMotors.setSpeedFeeder(-0.30);
+        reversedelay = Timer.getFPGATimestamp() + 0.1;
         System.out.println("Note Intaked");
         SmartDashboard.putBoolean("Note Got", true);
         reverse = true;

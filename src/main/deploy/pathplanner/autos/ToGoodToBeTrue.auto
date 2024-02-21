@@ -54,12 +54,6 @@
               }
             ]
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "StopDrive"
-          }
         }
       ]
     }
