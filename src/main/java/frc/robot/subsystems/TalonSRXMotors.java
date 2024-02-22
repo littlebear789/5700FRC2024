@@ -20,11 +20,13 @@ public class TalonSRXMotors extends SubsystemBase {
 
   //private final BeamBreak feederBeamBreak;
   private DigitalInput feederBeamBreak;
+  private DigitalInput feederBeamBreakLow;
 
 
   /** Creates a new TalonSRXMotors. */
   public TalonSRXMotors() {
     feederBeamBreak = new DigitalInput(0);
+    feederBeamBreakLow = new DigitalInput(2);
   }
 
 
@@ -47,6 +49,10 @@ public class TalonSRXMotors extends SubsystemBase {
   
   public boolean getFeederBeamBreak() {
     return !feederBeamBreak.get();
+  }
+
+    public boolean getFeederBeamBreakLow() {
+    return !feederBeamBreakLow.get();
   }
   
   @Override

@@ -41,6 +41,7 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kStart.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kBack.value);
+    private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
     /*Intake*/
     private final JoystickButton intakeSmartToggle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
@@ -48,7 +49,7 @@ public class RobotContainer {
     /*Shooter */
     private final int rightTiggerAxis = XboxController.Axis.kRightTrigger.value;
     private final int leftTiggerAxis = XboxController.Axis.kLeftTrigger.value;
-    private final JoystickButton ampscore = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+    private final JoystickButton ampscore = new JoystickButton(driver, XboxController.Button.kA.value);
 
     /*Auto Chooser */
     private final SendableChooser<Command> autoChooser;
@@ -80,7 +81,8 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
+                () -> robotCentric.getAsBoolean(),
+                () -> dampen.getAsBoolean()
             )
         );
 
@@ -129,11 +131,9 @@ public class RobotContainer {
         );
 
         new POVButton(driver, 0).whileTrue(new FeederCMD(talonSRXMotors,-1) );
-        new POVButton(driver, 90).whileTrue(new ShooterPistonToggle(shooter));
-        //new POVButton(driver, 180).whileTrue(new ShooterPistonToggle(shooter));
-        new POVButton(driver, 270).whileTrue(new IntakePistonCMD(intake,true) );
-        
-        new JoystickButton(driver, XboxController.Button.kA.value).whileTrue(new ShooterMotorOn(talonSRXMotors,true));
+        new POVButton(driver, 90).onTrue(new ShooterPistonToggle(shooter, 1));
+        new POVButton(driver, 270).onTrue(new ShooterPistonToggle(shooter, 0));
+        new POVButton(driver, 180).whileTrue(new IntakePistonCMD(intake,true) );
 
         new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
         new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .5).whileTrue(new ShooterCloseCMD(talonSRXMotors,shooter) );

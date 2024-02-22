@@ -36,7 +36,7 @@ public class IntakeDefaultCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(talonSRXMotors.getFeederBeamBreak()){
+    if(talonSRXMotors.getFeederBeamBreak() && talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", true);
     }
     else{

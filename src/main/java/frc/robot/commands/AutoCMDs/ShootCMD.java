@@ -22,7 +22,7 @@ public class ShootCMD extends Command {
 
   /** Creates a new SetTalonSpeed. */
   public ShootCMD(TalonSRXMotors talonSRXMotors) {
-    this.duration = 0.5;
+    this.duration = 1;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(talonSRXMotors);

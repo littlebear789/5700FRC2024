@@ -9,8 +9,9 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterPistonToggle extends Command {
   private Shooter shooter;
+  private int state;
   /** Creates a new ShooterPistonToggle. */
-  public ShooterPistonToggle(Shooter shooter) {
+  public ShooterPistonToggle(Shooter shooter, int state) {
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
@@ -25,12 +26,20 @@ public class ShooterPistonToggle extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonUp();
+    if(state == 1){
+      shooter.shooterPistonUp();
+      System.out.println("Shooter Up");
+    }else if(state == 0){
+      shooter.shooterPistonDown();
+      System.out.println("Shooter Down");
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+  }
 
   // Returns true when the command should end.
   @Override

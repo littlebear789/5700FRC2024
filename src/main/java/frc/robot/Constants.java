@@ -110,7 +110,7 @@ public final class Constants {
         /** Meters per Second */
         public static final double maxSpeed = 4.5; //This must be tuned to specific robot default 4.5
         /** Radians per Second */
-        public static final double maxAngularVelocity = 3; //This must be tuned to specific robot default 10
+        public static final double maxAngularVelocity = 5; //This must be tuned to specific robot default 10
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -159,7 +159,7 @@ public final class Constants {
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
         new PIDConstants(3, 0.05, 0.05), // Translation PID constants
-        new PIDConstants(2.5, 0.0, 0.0), // Rotation PID constants
+        new PIDConstants(3, 0.0, 0.0), // Rotation PID constants
         4.5, // Max module speed, in m/s
         0.4, // Drive base radius in meters. Distance from robot center to furthest module.
         new ReplanningConfig() // Default path replanning config. See the API for the options here

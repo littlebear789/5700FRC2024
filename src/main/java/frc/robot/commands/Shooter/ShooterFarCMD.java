@@ -33,14 +33,14 @@ public class ShooterFarCMD extends Command {
   public void initialize() {
     killed = false;
     System.out.println("Shooting Far");
-    shooter.shooterPistonDown();
+    //shooter.shooterPistonDown();
     feederdelay = Timer.getFPGATimestamp() + 1.5;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonDown();
+    //shooter.shooterPistonDown();
     talonSRXMotors.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);

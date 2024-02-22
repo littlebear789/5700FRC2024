@@ -35,14 +35,14 @@ public class ShooterCloseCMD extends Command {
   public void initialize() {
     killed = false;
     System.out.println("Shooting Speaker");
-    shooter.shooterPistonUp();
-    feederdelay = Timer.getFPGATimestamp() + 1.5;
+    //shooter.shooterPistonUp();
+    feederdelay = Timer.getFPGATimestamp() + 1;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonUp();
+    //shooter.shooterPistonUp();
     talonSRXMotors.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);

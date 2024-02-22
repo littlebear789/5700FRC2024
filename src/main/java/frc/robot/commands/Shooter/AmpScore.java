@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Shooter;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.TalonSRXMotors;
 import frc.robot.subsystems.Shooter;
@@ -13,6 +14,7 @@ public class AmpScore extends Command {
 
   private TalonSRXMotors talonSRXMotors;
   private Shooter shooter;
+  private double feederdelay;
 
 
 
@@ -21,6 +23,7 @@ public class AmpScore extends Command {
   public AmpScore(TalonSRXMotors talonSRXMotors,Shooter shooter) {
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(talonSRXMotors);
   }
@@ -29,16 +32,17 @@ public class AmpScore extends Command {
   @Override
   public void initialize() {
     System.out.println("AMP");
-    shooter.shooterPistonUp();
+    //shooter.shooterPistonUp();
+    feederdelay = Timer.getFPGATimestamp() + 0.1;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     talonSRXMotors.setShooterSpeed(1);
+    if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);
-    
+    }
   }
   // Called once the command ends or is interrupted.
   @Override
