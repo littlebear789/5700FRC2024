@@ -33,7 +33,6 @@ public class SmartIntake extends Command {
   public void initialize() {
     beamH = talonSRXMotors.getFeederBeamBreak();
     beamL = talonSRXMotors.getFeederBeamBreakLow();
-    intake.intakePistonDown();
     System.out.println("Intake Down");
     SmartDashboard.putBoolean("Intaking", true);
 
@@ -43,6 +42,7 @@ public class SmartIntake extends Command {
   @Override
   public void execute() {
     if(!beamH && !beamL){
+      intake.intakePistonDown();
       intake.intakeMotorSpeed(1);
       talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){

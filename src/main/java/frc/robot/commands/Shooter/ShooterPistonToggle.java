@@ -13,6 +13,7 @@ public class ShooterPistonToggle extends Command {
   /** Creates a new ShooterPistonToggle. */
   public ShooterPistonToggle(Shooter shooter, int state) {
     this.shooter = shooter;
+    this.state = state;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -20,7 +21,7 @@ public class ShooterPistonToggle extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -29,7 +30,7 @@ public class ShooterPistonToggle extends Command {
     if(state == 1){
       shooter.shooterPistonUp();
       System.out.println("Shooter Up");
-    }else if(state == 0){
+    }else if(state == -1){
       shooter.shooterPistonDown();
       System.out.println("Shooter Down");
     }

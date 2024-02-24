@@ -65,7 +65,6 @@ public class TeleopSwerve extends Command {
         switch(States.driveState){
             case forwardHold:
                 //heading lock - forward
-                
                 profiledPID.setGoal(0);
                 omegaDegPerSec = profiledPID.calculate(s_Swerve.getPose().getRotation().getDegrees());
                 rotationVal = Units.degreesToRadians(omegaDegPerSec);
@@ -101,7 +100,7 @@ public class TeleopSwerve extends Command {
       /* Drive */
       s_Swerve.drive(
         new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
-        rotationVal * Constants.Swerve.maxAngularVelocity, 
+        rotationVal, 
         !robotCentricSup.getAsBoolean(), 
          true
       );

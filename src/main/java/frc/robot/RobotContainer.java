@@ -132,11 +132,15 @@ public class RobotContainer {
 
         new POVButton(driver, 0).whileTrue(new FeederCMD(talonSRXMotors,-1) );
         new POVButton(driver, 90).onTrue(new ShooterPistonToggle(shooter, 1));
-        new POVButton(driver, 270).onTrue(new ShooterPistonToggle(shooter, 0));
+        new POVButton(driver, 270).onTrue(new ShooterPistonToggle(shooter, -1));
         new POVButton(driver, 180).whileTrue(new IntakePistonCMD(intake,true) );
 
-        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
-        new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .5).whileTrue(new ShooterCloseCMD(talonSRXMotors,shooter) );
+        //Shooting
+        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .8).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
+        new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .8).whileTrue(new ShooterCloseCMD(talonSRXMotors,shooter) );
+
+        new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .1).whileTrue(new ShooterPistonToggle(shooter,-1).alongWith(new ShooterMotorOn(talonSRXMotors,true)));
+        new Trigger(() -> driver.getRawAxis(leftTiggerAxis) > .1).whileTrue(new ShooterPistonToggle(shooter,1).alongWith(new ShooterMotorOn(talonSRXMotors,true)));
 
         ampscore.whileTrue(new AmpScore(talonSRXMotors, shooter));
         intakeSmartToggle.whileTrue(new SmartIntake(intake,talonSRXMotors));
@@ -156,15 +160,15 @@ public class RobotContainer {
         } 
         else {
             if (SmartDashboard.getBoolean("Shooting", false)) {
-                led.setAllBlink(Color.kGreen, 0.25);
+                led.setAllBlink(Color.kGreen, 1.0);
                 //System.out.println("Green");
             }
             else if (SmartDashboard.getBoolean("Shot", false)) {
-                led.setAll(Color.kBlack);
+                led.rainbow();
                 //System.out.println("Green");
             }
             else if (SmartDashboard.getBoolean("Intaking", false)) {
-                led.setAllBlink(Color.kRed, 0.25);
+                led.setAllBlink(Color.kRed, 1.0);
                 //System.out.println("Green");
             }
             else if(SmartDashboard.getBoolean("Note Got", false)){
