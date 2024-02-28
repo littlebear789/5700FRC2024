@@ -14,6 +14,8 @@ public class LED extends SubsystemBase {
   private final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(LEDLENGTH);
   private int m_rainbowFirstPixelHue;
   private final Timer blink = new Timer();
+  private double lastChange;
+  private boolean on=true;
 
   public LED() {
     m_led.setLength(m_ledBuffer.getLength());
@@ -53,15 +55,26 @@ public class LED extends SubsystemBase {
   }
 
   public void setAllBlink(Color color, Double sec) {
-    if(blink.hasElapsed(sec)) {
-      if (m_ledBuffer.getLED(0) != Color.kBlack) {
-        color = Color.kBlack;
+
+    double timestamp = Timer.getFPGATimestamp();
+    if(timestamp - lastChange > 0.2){
+      on = !on;
+      lastChange = timestamp;
+    }
+    if (on){
+      for (var i = 0; i < m_ledBuffer.getLength(); i++) {
+        m_ledBuffer.setLED(i, color);
       }
+
+      m_led.setData(m_ledBuffer);
+    }else{
+      color = Color.kBlack;
       for (var i = 0; i < m_ledBuffer.getLength(); i++) {
         m_ledBuffer.setLED(i, color);
       }
       m_led.setData(m_ledBuffer);
-      blink.reset();
+      
     }
   }
+
 }

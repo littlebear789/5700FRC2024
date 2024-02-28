@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.6570624081419103,
-        "y": 5.567662106752784
+        "x": 2.5050384003901907,
+        "y": 4.326837143702777
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.852055920636057,
-        "y": 5.5490723088894285
+        "x": 2.1041221863590347,
+        "y": 4.582469303340578
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.45,
-        "y": 5.567662106752784
+        "x": 1.4067998841345608,
+        "y": 5.503348688212794
       },
       "prevControl": {
-        "x": 1.3499999999999999,
-        "y": 5.567662106752784
+        "x": 1.722814478598876,
+        "y": 4.854408978358715
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,9 +43,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "TwoNoteB2B",
+  "folder": "4NoteB2B",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -26.569999999999993,
     "velocity": 0
   },
   "useDefaultConstraints": true

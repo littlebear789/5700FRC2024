@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.3803113320512366,
-        "y": 5.567662106752784
+        "x": 0.8042672085274717,
+        "y": 6.745180123483849
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3803113320512383,
-        "y": 5.567662106752784
+        "x": 2.098624768678109,
+        "y": 7.300410029391488
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.68045071702679,
-        "y": 5.567662106752784
+        "x": 7.742516056460684,
+        "y": 7.417685692514242
       },
       "prevControl": {
-        "x": 2.0135853236020433,
-        "y": 5.567662106752784
+        "x": 5.047022906858589,
+        "y": 7.417685692514242
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "IntakeOut",
-      "waypointRelativePos": 0.3,
+      "waypointRelativePos": 0.95,
       "command": {
         "type": "parallel",
         "data": {
@@ -50,8 +50,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 4.5,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 3.0,
+    "maxAcceleration": 2.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
@@ -61,10 +61,10 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "TwoNoteB2B",
+  "folder": "TwoNoteLSide",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 57.91,
     "velocity": 0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }

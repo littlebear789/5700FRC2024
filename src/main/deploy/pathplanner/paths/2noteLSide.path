@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.749954642766429,
-        "y": 6.670053340106681
+        "x": 0.7626093884666401,
+        "y": 6.735832958845405
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5562248267353667,
-        "y": 6.889945208461851
+        "x": 0.9594723114726902,
+        "y": 7.0491139661623405
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.9195544105373914,
-        "y": 6.977901955803917
+        "x": 2.904894952647049,
+        "y": 6.992561413694256
       },
       "prevControl": {
-        "x": 1.878629669823288,
-        "y": 6.97790195580398
-      },
-      "nextControl": {
-        "x": 3.007511157879459,
-        "y": 6.977901955803912
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.9195544105373914,
-        "y": 6.977901955803917
-      },
-      "prevControl": {
-        "x": 2.890235494756704,
-        "y": 6.948583040023223
+        "x": 2.426852750559956,
+        "y": 6.992561413694256
       },
       "nextControl": null,
       "isLocked": false,
@@ -57,7 +41,25 @@
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeOut",
+      "waypointRelativePos": 0.6,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "SmartAutoIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 1.0,
@@ -66,11 +68,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 41.18592516570907,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "TwoNoteLSide",
   "previewStartingState": {
     "rotation": 59.03624346792643,
     "velocity": 0

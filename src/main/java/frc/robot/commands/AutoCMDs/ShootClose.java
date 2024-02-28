@@ -24,7 +24,7 @@ public class ShootClose extends Command {
 
   /** Creates a new SetTalonSpeed. */
   public ShootClose(TalonSRXMotors talonSRXMotors,Shooter shooter) {
-    this.duration = 1;
+    this.duration = 0.7;
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -45,7 +45,7 @@ public class ShootClose extends Command {
   @Override
   public void execute() {
     talonSRXMotors.setShooterSpeed(1); 
-    //shooter.shooterPistonUp();
+    shooter.shooterPistonDown();
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;
     }

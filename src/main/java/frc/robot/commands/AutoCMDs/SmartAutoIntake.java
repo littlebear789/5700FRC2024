@@ -4,7 +4,6 @@
 
 package frc.robot.commands.AutoCMDs;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
@@ -16,12 +15,14 @@ public class SmartAutoIntake extends Command {
   private Intake intake;
   private TalonSRXMotors talonSRXMotors;
   private boolean killed = false;
-  private boolean reverse = false;
-  private double reversedelay;
+  private boolean beamH = false;
+  private boolean beamL = false;
+  private boolean trippedBL;
+  private boolean lastStatus;
 
 
   /** Creates a new IntakeCMD. */
-  public SmartAutoIntake(Intake intake, TalonSRXMotors talonSRXMotors) {
+  public SmartAutoIntake (Intake intake, TalonSRXMotors talonSRXMotors) {
     this.intake = intake;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,44 +32,44 @@ public class SmartAutoIntake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    killed = false;
-    reverse = false;
-    intake.intakePistonDown();
-    intake.intakeMotorSpeed(1);
-    talonSRXMotors.setSpeedFeeder(0.75);
-    //reversedelay = Timer.getFPGATimestamp();
-    System.out.println("Intake Down, Full Speed, No Note");
+    System.out.println("Intake Down");
     SmartDashboard.putBoolean("Intaking", true);
+    killed = false;
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(reverse == false){
-     if(talonSRXMotors.getFeederBeamBreak()){
-        intake.intakeMotorSpeed(0);
-        talonSRXMotors.setSpeedFeeder(-0.25);
-        reversedelay = Timer.getFPGATimestamp() + 0.05;
-        System.out.println("Note Intaked");
-        SmartDashboard.putBoolean("Note Got", true);
-        reverse = true;
-      }
+    beamH = talonSRXMotors.getFeederBeamBreak();
+    beamL = talonSRXMotors.getFeederBeamBreakLow();
+    trippedBL = beamL && !lastStatus;
+    lastStatus = beamL;
+    if(!beamH && !beamL){
+      //intake.intakePistonDown();
+      intake.intakeMotorSpeed(1);
+      talonSRXMotors.setSpeedFeeder(1);
+    } else if(!beamH && beamL){
+      intake.intakeMotorSpeed(0);
+      talonSRXMotors.setSpeedFeeder(0.7);
+    } else if(beamH && !beamL){
+      intake.intakeMotorSpeed(0);
+      talonSRXMotors.setSpeedFeeder(-0.4);
+    }else if(beamH && beamL && trippedBL){
+      intake.intakeMotorSpeed(0);
+      talonSRXMotors.setSpeedFeeder(0);
+      SmartDashboard.putBoolean("Note Got", true);
+      SmartDashboard.putBoolean("Intaking", false);
+      killed = true;
     }
-    if(reverse){
-      if(Timer.getFPGATimestamp() > reversedelay){
-        talonSRXMotors.setSpeedFeeder(0);
-        killed = true;
-      }
-    }
+      
   }
+
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    talonSRXMotors.setSpeedFeeder(0);
-    intake.intakeMotorSpeed(0);
     SmartDashboard.putBoolean("Intaking", false);
-
   }
 
   // Returns true when the command should end.

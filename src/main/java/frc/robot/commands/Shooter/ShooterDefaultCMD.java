@@ -37,12 +37,8 @@ public class ShooterDefaultCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(talonSRXMotors.getFeederBeamBreak()){
-     SmartDashboard.putBoolean("Note Got", true);
-    }
-    else{
-      SmartDashboard.putBoolean("Note Got", false);
-    }
+    talonSRXMotors.setShooterSpeed(0);  
+    talonSRXMotors.setSpeedFeeder(0);
   }
 
 }

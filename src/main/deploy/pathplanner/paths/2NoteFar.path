@@ -33,7 +33,7 @@
   "eventMarkers": [
     {
       "name": "IntakeOut",
-      "waypointRelativePos": 0.2,
+      "waypointRelativePos": 0.45,
       "command": {
         "type": "parallel",
         "data": {

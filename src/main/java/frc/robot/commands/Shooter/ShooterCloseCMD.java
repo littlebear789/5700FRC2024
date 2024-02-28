@@ -35,23 +35,30 @@ public class ShooterCloseCMD extends Command {
   public void initialize() {
     killed = false;
     System.out.println("Shooting Speaker");
-    //shooter.shooterPistonUp();
-    feederdelay = Timer.getFPGATimestamp() + 1;
+    SmartDashboard.putBoolean("Shooting", true);
+    feederdelay = Timer.getFPGATimestamp() + 0.65;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //shooter.shooterPistonUp();
+    shooter.shooterPistonDown();
     talonSRXMotors.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);
     }
+    if(!talonSRXMotors.getFeederBeamBreak()){
+      SmartDashboard.putBoolean("Shot", true);
+      SmartDashboard.putBoolean("Shooting", false);
+    }
+
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     System.out.println("Shooting Release");
+    SmartDashboard.putBoolean("Shot", false);
+    SmartDashboard.putBoolean("Shooting", false);
   }
 
   // Returns true when the command should end.

@@ -2,15 +2,21 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7749482927530047,
-      "y": 6.664189556950543
+      "x": 0.5404204540602812,
+      "y": 7.0398809743488435
     },
-    "rotation": 61.00243988110454
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LeftSideRotate"
+          }
+        },
         {
           "type": "sequential",
           "data": {
@@ -18,7 +24,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ShootCMD"
+                  "name": "ShootClose"
                 }
               },
               {
@@ -33,7 +39,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "4note while moving"
+            "pathName": "2noteLSide"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SmartAutoIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "B2BL"
           }
         },
         {
@@ -43,7 +61,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ShootCMD"
+                  "name": "ShootClose"
                 }
               },
               {

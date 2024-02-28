@@ -55,8 +55,4 @@ public class TalonSRXMotors extends SubsystemBase {
     return !feederBeamBreakLow.get();
   }
   
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 }

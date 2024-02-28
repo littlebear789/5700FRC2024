@@ -17,7 +17,7 @@ public class SmartIntake extends Command {
   private boolean killed = false;
   private boolean beamH = false;
   private boolean beamL = false;
-  //private Boolean beambreak;
+
 
 
   /** Creates a new IntakeCMD. */
@@ -31,31 +31,33 @@ public class SmartIntake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    beamH = talonSRXMotors.getFeederBeamBreak();
-    beamL = talonSRXMotors.getFeederBeamBreakLow();
     System.out.println("Intake Down");
     SmartDashboard.putBoolean("Intaking", true);
+    killed = false;
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    beamH = talonSRXMotors.getFeederBeamBreak();
+    beamL = talonSRXMotors.getFeederBeamBreakLow();
     if(!beamH && !beamL){
-      intake.intakePistonDown();
+      //intake.intakePistonUp();
       intake.intakeMotorSpeed(1);
       talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0.2);
-    }  else if(beamH && !beamL){
+      talonSRXMotors.setSpeedFeeder(0.8);
+    } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(-0.2);
+      talonSRXMotors.setSpeedFeeder(-0.3);
     }else if(beamH && beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(0);
       SmartDashboard.putBoolean("Note Got", true);
-    }else{}
+      SmartDashboard.putBoolean("Intaking", false);
+    }
       
   }
 
@@ -63,8 +65,6 @@ public class SmartIntake extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    talonSRXMotors.setSpeedFeeder(0);
-    intake.intakeMotorSpeed(0);
     SmartDashboard.putBoolean("Intaking", false);
 
   }
