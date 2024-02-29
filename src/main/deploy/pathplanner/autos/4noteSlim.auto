@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3803113320512366,
+      "x": 1.35,
       "y": 5.567662106752784
     },
     "rotation": 0
@@ -45,26 +45,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Back2Base"
+            "pathName": "2nd3rdS"
           }
         },
         {
-          "type": "sequential",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootClose"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FireCMD"
-                }
-              }
-            ]
+            "name": "SmartAutoIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3rd4thS"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SmartAutoIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4th2BS"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootClose"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FireCMD"
           }
         }
       ]

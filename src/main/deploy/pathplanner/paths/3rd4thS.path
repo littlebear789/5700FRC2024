@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7907761529808779,
-        "y": 6.215610145506006
+        "x": 2.3918139264849962,
+        "y": 5.849123698247397
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.3789179578313442,
-        "y": 5.555682677077613
+        "x": 1.3949707899415804,
+        "y": 5.564201752179908
       },
       "prevControl": {
-        "x": 1.3575063857483958,
-        "y": 6.1067431165948545
+        "x": 1.3934322725834056,
+        "y": 5.65241036288487
       },
       "nextControl": {
-        "x": 1.39497078994158,
-        "y": 5.142537827932798
+        "x": 1.3974207703472645,
+        "y": 5.423735759585485
       },
       "isLocked": false,
       "linkedName": null
@@ -36,8 +36,8 @@
         "y": 4.315142989260338
       },
       "prevControl": {
-        "x": 1.7761166950905336,
-        "y": 5.057512972168802
+        "x": 2.2306518560501756,
+        "y": 5.20258636779372
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,12 +46,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.9,
-      "rotationDegrees": 0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 1.05,
+      "waypointRelativePos": 1.0,
       "rotationDegrees": 0,
       "rotateFast": false
     }
@@ -59,8 +54,8 @@
   "constraintZones": [
     {
       "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0.55,
-      "maxWaypointRelativePos": 1.2,
+      "minWaypointRelativePos": 0.6,
+      "maxWaypointRelativePos": 1.25,
       "constraints": {
         "maxVelocity": 1.0,
         "maxAcceleration": 1.0,
@@ -70,7 +65,7 @@
     },
     {
       "name": "New Constraints Zone",
-      "minWaypointRelativePos": 1.8,
+      "minWaypointRelativePos": 1.85,
       "maxWaypointRelativePos": 2.0,
       "constraints": {
         "maxVelocity": 1.0,
@@ -83,7 +78,7 @@
   "eventMarkers": [
     {
       "name": "Shoot",
-      "waypointRelativePos": 0.35,
+      "waypointRelativePos": 0.5,
       "command": {
         "type": "parallel",
         "data": {
@@ -137,11 +132,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -31.882212734320117,
+    "rotation": -34.99561235761796,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "4NoteB2B",
+  "folder": "4NoteB2BSlim",
   "previewStartingState": {
     "rotation": 44.4,
     "velocity": 0

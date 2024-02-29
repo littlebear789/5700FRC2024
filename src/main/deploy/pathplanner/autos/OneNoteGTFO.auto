@@ -47,6 +47,12 @@
           "data": {
             "pathName": "OneNoteGTFO"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "SmartAutoIntake"
+          }
         }
       ]
     }

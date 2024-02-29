@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.62952211618709,
-        "y": 1.8031133205123562
+        "x": 1.2190572952574483,
+        "y": 3.3570158568888573
       },
       "isLocked": false,
       "linkedName": null
@@ -20,12 +20,12 @@
         "y": 1.2167350048985814
       },
       "prevControl": {
-        "x": 1.66820278890986,
-        "y": 1.7800718295400901
+        "x": 1.7321383214195003,
+        "y": 1.5832214521571912
       },
       "nextControl": {
-        "x": 3.1394462788925592,
-        "y": 0.7769512681882504
+        "x": 3.198016585930056,
+        "y": 0.8784722865271146
       },
       "isLocked": false,
       "linkedName": null
@@ -46,7 +46,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.8,
+      "waypointRelativePos": 1.5,
       "rotationDegrees": 0,
       "rotateFast": false
     },
@@ -56,11 +56,23 @@
       "rotateFast": false
     }
   ],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 1.8,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
-      "name": "New Event Marker",
-      "waypointRelativePos": 1.85,
+      "name": "IntakeOut",
+      "waypointRelativePos": 1.9,
       "command": {
         "type": "parallel",
         "data": {
@@ -68,7 +80,7 @@
             {
               "type": "named",
               "data": {
-                "name": "IntakeOut"
+                "name": "SmartAutoIntake"
               }
             }
           ]
@@ -77,8 +89,8 @@
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 2.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
