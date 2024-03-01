@@ -96,9 +96,9 @@ public final class Constants {
 
         /* Heading PID Values */
         public static final double HeadingKP = 3;
-        public static final double HeadingKI = 0.03;
-        public static final double HeadingKD = 0.03;
-        public static final double HeadingTolerence = 0.1;
+        public static final double HeadingKI = 0.05;
+        public static final double HeadingKD = 0.02;
+        public static final double HeadingTolerence = 0;
  
 
         /* Drive Motor Characterization Values From SYSID */

@@ -27,7 +27,7 @@ public class IntakeDefaultCMD extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.intakePistonDown();
+    //intake.intakePistonDown();
     intake.intakeMotorSpeed(0);
     System.out.println("Intake Default");
     
@@ -36,10 +36,10 @@ public class IntakeDefaultCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(talonSRXMotors.getFeederBeamBreak()){
+    if(talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", true);
     }
-    else if(!talonSRXMotors.getFeederBeamBreak()){
+    else if(!talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", false);
     }
   }

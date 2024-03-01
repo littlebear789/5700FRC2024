@@ -12,11 +12,11 @@ import frc.robot.subsystems.Intake;
 
 public class IntakePistonCMD extends Command {
   private Intake intake;
-  private boolean toggle;
+  private int toggle;
   //private RobotContainer robotContainer;
 
   /** Creates a new IntakeCMD. */
-  public IntakePistonCMD(Intake intake, boolean toggle) {
+  public IntakePistonCMD(Intake intake, int toggle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.intake = intake;
     this.toggle = toggle;
@@ -34,15 +34,12 @@ public class IntakePistonCMD extends Command {
   @Override
   public void execute() {
 
-    if (toggle){
-      intake.intakePistonDown();
-      
-
-    }
-
-    else{
+    if(toggle == 1){
       intake.intakePistonUp();
-      
+      System.out.println("Intake Up");
+    }else if(toggle == -1){
+      intake.intakePistonDown();
+      System.out.println("Intake Down");
     }
 
   }

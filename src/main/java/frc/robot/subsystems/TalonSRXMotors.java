@@ -18,7 +18,7 @@ public class TalonSRXMotors extends SubsystemBase {
   private TalonSRX motor3 = new TalonSRX(Constants.motor3ID); //shooter motor
   private TalonSRX motor4 = new TalonSRX(Constants.motor4ID); //shooter motor
 
-  //private final BeamBreak feederBeamBreak;
+
   private DigitalInput feederBeamBreak;
   private DigitalInput feederBeamBreakLow;
 
@@ -51,8 +51,12 @@ public class TalonSRXMotors extends SubsystemBase {
     return !feederBeamBreak.get();
   }
 
-    public boolean getFeederBeamBreakLow() {
+  public boolean getFeederBeamBreakLow() {
     return !feederBeamBreakLow.get();
+  }
+
+  public double getShooterSpeed() {
+    return motor3.getSelectedSensorVelocity();
   }
   
 }

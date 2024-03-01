@@ -131,9 +131,9 @@ public class RobotContainer {
         );
 
         new POVButton(driver, 0).whileTrue(new FeederCMD(talonSRXMotors,-1) );
-        new POVButton(driver, 90).onTrue(new ShooterPistonToggle(shooter, 1));
-        new POVButton(driver, 270).onTrue(new ShooterPistonToggle(shooter, -1));
-        new POVButton(driver, 180).whileTrue(new IntakePistonCMD(intake,true) );
+        new POVButton(driver, 90).onTrue(new IntakePistonCMD(intake,1));
+        new POVButton(driver, 270).onTrue(new IntakePistonCMD(intake,-1));
+        //new POVButton(driver, 180).whileTrue(new IntakePistonCMD(intake,true) );
 
         //Shooting
         new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );

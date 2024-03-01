@@ -11,9 +11,9 @@ import frc.robot.subsystems.TalonSRXMotors;
 import frc.robot.subsystems.Shooter;
 
 
-public class ShooterCloseCMD extends Command {
+public class ShooterCloseE extends Command {
 
-  private double feederdelay;
+
   private TalonSRXMotors talonSRXMotors;
   private Shooter shooter;
   private boolean killed = false;
@@ -22,7 +22,7 @@ public class ShooterCloseCMD extends Command {
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterCloseCMD(TalonSRXMotors talonSRXMotors,Shooter shooter) {
+  public ShooterCloseE(TalonSRXMotors talonSRXMotors,Shooter shooter) {
     
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
@@ -36,7 +36,6 @@ public class ShooterCloseCMD extends Command {
     killed = false;
     System.out.println("Shooting Speaker");
     SmartDashboard.putBoolean("Shooting", true);
-    feederdelay = Timer.getFPGATimestamp() + 0.65;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,9 +43,11 @@ public class ShooterCloseCMD extends Command {
   public void execute() {
     shooter.shooterPistonDown();
     talonSRXMotors.setShooterSpeed(1);
-    if(Timer.getFPGATimestamp() > feederdelay){
+    
+    if(talonSRXMotors.getShooterSpeed() > 10){
     talonSRXMotors.setSpeedFeeder(1);
     }
+
     if(!talonSRXMotors.getFeederBeamBreak()){
       SmartDashboard.putBoolean("Shot", true);
       SmartDashboard.putBoolean("Shooting", false);

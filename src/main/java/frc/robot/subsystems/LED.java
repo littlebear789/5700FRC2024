@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LED extends SubsystemBase {
   private final int PWMPORT = 1;
-  private final int LEDLENGTH = 165;
+  private final int LEDLENGTH = 164;
   private final AddressableLED m_led = new AddressableLED(PWMPORT);
   private final AddressableLEDBuffer m_ledBuffer = new AddressableLEDBuffer(LEDLENGTH);
   private int m_rainbowFirstPixelHue;
@@ -57,7 +57,7 @@ public class LED extends SubsystemBase {
   public void setAllBlink(Color color, Double sec) {
 
     double timestamp = Timer.getFPGATimestamp();
-    if(timestamp - lastChange > 0.2){
+    if(timestamp - lastChange > 0.15){
       on = !on;
       lastChange = timestamp;
     }
