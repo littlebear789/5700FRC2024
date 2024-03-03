@@ -71,7 +71,6 @@ public class RobotContainer {
         NamedCommands.registerCommand("ShootCMD", new ShootFar(talonSRXMotors, shooter));
         NamedCommands.registerCommand("ShootClose", new ShootClose(talonSRXMotors,shooter));
         NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors,shooter));
-        NamedCommands.registerCommand("IntakeOut", new IntakeOut(intake,talonSRXMotors));
         NamedCommands.registerCommand("SmartAutoIntake", new SmartAutoIntake(intake,talonSRXMotors));
 
         //Swerve

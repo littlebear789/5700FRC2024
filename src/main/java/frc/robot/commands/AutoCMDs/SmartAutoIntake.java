@@ -32,6 +32,7 @@ public class SmartAutoIntake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    intake.intakePistonDown();
     System.out.println("Intake Down");
     SmartDashboard.putBoolean("Intaking", true);
     killed = false;
@@ -48,10 +49,10 @@ public class SmartAutoIntake extends Command {
     if(!beamH && !beamL){
       //intake.intakePistonDown();
       intake.intakeMotorSpeed(1);
-      talonSRXMotors.setSpeedFeeder(1);
+      talonSRXMotors.setSpeedFeeder(0.7);
     } else if(!beamH && beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0.7);
+      talonSRXMotors.setSpeedFeeder(0.6);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(-0.4);

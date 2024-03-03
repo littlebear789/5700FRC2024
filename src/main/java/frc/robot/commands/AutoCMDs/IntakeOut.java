@@ -6,8 +6,6 @@ package frc.robot.commands.AutoCMDs;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-//import frc.lib.util.MathUtil;
-//import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.TalonSRXMotors;
 
@@ -50,13 +48,6 @@ public class IntakeOut extends Command {
       killed = true;
     }
 
-    /* 
-    if(talonSRXMotors.getFeederBeamBreak()){
-      intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0);
-      killed = true;
-    }
-    */
   }
   // Called once the command ends or is interrupted.
   @Override
