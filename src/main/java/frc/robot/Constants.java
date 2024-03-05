@@ -12,7 +12,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-//import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
@@ -25,6 +24,12 @@ public final class Constants {
     public static final int motor2ID = 15; //Test TalonSRX motor 2 feeder
     public static final int motor3ID = 16; //Test TalonSRX motor 3 shooter
     public static final int motor4ID = 17; //Test TalonSRX motor 4 shooter
+    
+    //Shooter PID
+    public static final int kSlotIdx = 0;
+	public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 30;
+    
     //Intake Pistons
     public static final int intakeOpen = 2;
     public static final int intakeClose = 3;

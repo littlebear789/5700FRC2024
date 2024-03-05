@@ -48,22 +48,20 @@ public class SmartIntake extends Command {
     lastStatus = beamL;
     if(!beamH && !beamL){
       //intake.intakePistonUp();
-      intake.intakeMotorSpeed(1);
-      talonSRXMotors.setSpeedFeeder(0.7);
+      intake.intakeMotorSpeed(0.5);
+      talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0.6);
+      talonSRXMotors.setSpeedFeeder(0.8);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(-0.4);
     }else if(beamH && beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(0);
-      if(trippedBL){
-        killed = true;
-        SmartDashboard.putBoolean("Note Got", true);
-        SmartDashboard.putBoolean("Intaking", false);
-      }
+      SmartDashboard.putBoolean("Note Not Set", false);
+      SmartDashboard.putBoolean("Note Got", true);
+      SmartDashboard.putBoolean("Intaking", false);
     }
       
   }

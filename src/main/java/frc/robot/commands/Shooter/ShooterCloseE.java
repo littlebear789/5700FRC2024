@@ -41,18 +41,11 @@ public class ShooterCloseE extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonDown();
-    talonSRXMotors.setShooterSpeed(1);
-    
-    if(talonSRXMotors.getShooterSpeed() > 10){
-    talonSRXMotors.setSpeedFeeder(1);
+    talonSRXMotors.setShooterSpeedPID(400);
+    System.out.println(talonSRXMotors.getShooterSpeed());
+    if(Math.abs(talonSRXMotors.getShooterSpeed() - 400) < 10){
+      talonSRXMotors.setSpeedFeeder(1);
     }
-
-    if(!talonSRXMotors.getFeederBeamBreak()){
-      SmartDashboard.putBoolean("Shot", true);
-      SmartDashboard.putBoolean("Shooting", false);
-    }
-
   }
   // Called once the command ends or is interrupted.
   @Override

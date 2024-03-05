@@ -48,11 +48,11 @@ public class SmartAutoIntake extends Command {
     lastStatus = beamL;
     if(!beamH && !beamL){
       //intake.intakePistonDown();
-      intake.intakeMotorSpeed(1);
-      talonSRXMotors.setSpeedFeeder(0.7);
+      intake.intakeMotorSpeed(0.5);
+      talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0.6);
+      talonSRXMotors.setSpeedFeeder(0.7);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(-0.4);

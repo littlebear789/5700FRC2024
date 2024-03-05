@@ -3,6 +3,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -73,6 +74,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors,shooter));
         NamedCommands.registerCommand("SmartAutoIntake", new SmartAutoIntake(intake,talonSRXMotors));
 
+       
+
         //Swerve
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -132,7 +135,7 @@ public class RobotContainer {
         new POVButton(driver, 0).whileTrue(new FeederCMD(talonSRXMotors,-1) );
         new POVButton(driver, 90).onTrue(new IntakePistonCMD(intake,1));
         new POVButton(driver, 270).onTrue(new IntakePistonCMD(intake,-1));
-        //new POVButton(driver, 180).whileTrue(new IntakePistonCMD(intake,true) );
+        new POVButton(driver, 180).whileTrue(new ShooterCloseE(talonSRXMotors, shooter));
 
         //Shooting
         new Trigger(() -> driver.getRawAxis(rightTiggerAxis) > .5).whileTrue(new ShooterFarCMD(talonSRXMotors,shooter) );
@@ -167,6 +170,10 @@ public class RobotContainer {
             else if (SmartDashboard.getBoolean("Intaking", false)) {
                 led.setAllBlink(Color.kRed, 0.2);
                 //System.out.println("Green");
+            }
+            else if(SmartDashboard.getBoolean("Note Not Set", false)){
+                led.setAll(Color.kRed);
+                //System.out.println("Solid Green");
             }
             else if(SmartDashboard.getBoolean("Note Got", false)){
                 led.setAll(Color.kGreen);

@@ -71,18 +71,6 @@
           "data": {
             "pathName": "4th2BS"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShootClose"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "FireCMD"
-          }
         }
       ]
     }

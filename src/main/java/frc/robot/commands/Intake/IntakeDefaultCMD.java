@@ -36,11 +36,24 @@ public class IntakeDefaultCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(talonSRXMotors.getFeederBeamBreakLow()){
+    if(talonSRXMotors.getFeederBeamBreak() && talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", true);
+      SmartDashboard.putBoolean("Note Not Set", false);
+      talonSRXMotors.setSpeedFeeder(0);
+
     }
-    else if(!talonSRXMotors.getFeederBeamBreakLow()){
+    else if(talonSRXMotors.getFeederBeamBreakLow() && !talonSRXMotors.getFeederBeamBreak()){
+      SmartDashboard.putBoolean("Note Not Set", true);
+      talonSRXMotors.setSpeedFeeder(0.5);
+    }
+   else if(!talonSRXMotors.getFeederBeamBreakLow() && talonSRXMotors.getFeederBeamBreak()){
+      SmartDashboard.putBoolean("Note Not Set", true);
+      talonSRXMotors.setSpeedFeeder(-0.35);
+    }
+    else{
       SmartDashboard.putBoolean("Note Got", false);
+      SmartDashboard.putBoolean("Note Not Set", false);
+      talonSRXMotors.setSpeedFeeder(0);
     }
   }
 
