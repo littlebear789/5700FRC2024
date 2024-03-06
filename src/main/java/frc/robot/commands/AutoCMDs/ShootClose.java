@@ -10,6 +10,7 @@ import frc.robot.subsystems.TalonSRXMotors;
 
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class ShootClose extends Command {
@@ -37,6 +38,7 @@ public class ShootClose extends Command {
     killed = false;
     endTime = Timer.getFPGATimestamp() + duration;
     System.out.println("Shooter Close On");
+    SmartDashboard.putBoolean("Shooting", true);
     
 
   }
@@ -45,7 +47,7 @@ public class ShootClose extends Command {
   @Override
   public void execute() {
     talonSRXMotors.setShooterSpeed(1); 
-    shooter.shooterPistonDown();
+    shooter.shooterPistonUp();
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;
     }
@@ -53,7 +55,6 @@ public class ShootClose extends Command {
   }
   @Override
   public void end(boolean interrupted) {
-
   }
 
 

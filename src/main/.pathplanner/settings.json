@@ -3,8 +3,10 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "4NoteB2BSlim",
     "4NoteB2B",
+    "4NoteB2BSlim",
+    "DumpNPump",
+    "Test",
     "TwoNoteB2B",
     "TwoNoteLSide",
     "TwoNoteRSide"

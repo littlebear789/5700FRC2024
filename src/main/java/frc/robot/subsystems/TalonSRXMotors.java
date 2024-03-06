@@ -16,8 +16,8 @@ import frc.robot.Constants;
 public class TalonSRXMotors extends SubsystemBase {
 
   private TalonSRX motor2 = new TalonSRX(Constants.motor2ID);// feeder conveyor motor
-  private WPI_TalonSRX motor3 = new WPI_TalonSRX(Constants.motor3ID); //shooter motor
-  private WPI_TalonSRX motor4 = new WPI_TalonSRX(Constants.motor4ID); //shooter motor
+  private TalonSRX motor3 = new TalonSRX(Constants.motor3ID); //shooter motor
+  private TalonSRX motor4 = new TalonSRX(Constants.motor4ID); //shooter motor
 
   private DigitalInput feederBeamBreak;
   private DigitalInput feederBeamBreakLow;
@@ -39,7 +39,7 @@ public class TalonSRXMotors extends SubsystemBase {
     motor3.setSensorPhase(true);
 
     motor3.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-    motor3.config_kF(Constants.kPIDLoopIdx, 1023.0/35000.0, Constants.kTimeoutMs);
+    motor3.config_kF(Constants.kPIDLoopIdx, 1023.0/40000.0, Constants.kTimeoutMs);
 		motor3.config_kP(Constants.kPIDLoopIdx,0.25, Constants.kTimeoutMs);
 		motor3.config_kI(Constants.kPIDLoopIdx, 0.001, Constants.kTimeoutMs);
 		motor3.config_kD(Constants.kPIDLoopIdx, 0, Constants.kTimeoutMs);

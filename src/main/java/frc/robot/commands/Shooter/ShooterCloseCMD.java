@@ -42,7 +42,7 @@ public class ShooterCloseCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonDown();
+    shooter.shooterPistonUp();
     talonSRXMotors.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);

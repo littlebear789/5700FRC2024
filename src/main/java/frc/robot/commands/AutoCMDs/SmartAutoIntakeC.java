@@ -11,18 +11,18 @@ import frc.robot.subsystems.TalonSRXMotors;
 
 
 
-public class SmartAutoIntake extends Command {
+public class SmartAutoIntakeC extends Command {
   private Intake intake;
   private TalonSRXMotors talonSRXMotors;
   private boolean killed = false;
   private boolean beamH = false;
   private boolean beamL = false;
-  private boolean trippedBL;
+  private boolean clearBL;
   private boolean lastStatus;
 
 
   /** Creates a new IntakeCMD. */
-  public SmartAutoIntake (Intake intake, TalonSRXMotors talonSRXMotors) {
+  public SmartAutoIntakeC (Intake intake, TalonSRXMotors talonSRXMotors) {
     this.intake = intake;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,7 +36,7 @@ public class SmartAutoIntake extends Command {
     System.out.println("Intake Down");
     SmartDashboard.putBoolean("Intaking", true);
     killed = false;
-
+    clearBL=false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,19 +44,23 @@ public class SmartAutoIntake extends Command {
   public void execute() {
     beamH = talonSRXMotors.getFeederBeamBreak();
     beamL = talonSRXMotors.getFeederBeamBreakLow();
-    trippedBL = beamL && !lastStatus;
-    lastStatus = beamL;
     if(!beamH && !beamL){
       //intake.intakePistonDown();
       intake.intakeMotorSpeed(1);
-      talonSRXMotors.setSpeedFeeder(0.8);
+      talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0.4);
+      talonSRXMotors.setSpeedFeeder(0.9);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(-0.24);
-    }else if(beamH && beamL ){
+      talonSRXMotors.setSpeedFeeder(-0.254);
+      clearBL = true;
+    }
+    else if(beamH && beamL){
+      intake.intakeMotorSpeed(0);
+      talonSRXMotors.setSpeedFeeder(0.4);
+    }
+    else if(beamH && beamL && clearBL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(0);
       SmartDashboard.putBoolean("Note Got", true);

@@ -35,20 +35,15 @@ public class AmpScore extends Command {
     System.out.println("AMP");
     //shooter.shooterPistonUp();
     SmartDashboard.putBoolean("Shooting", true);
-    feederdelay = Timer.getFPGATimestamp() + 0.2;
+    //feederdelay = Timer.getFPGATimestamp() + 0.2;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonDown();
+    //shooter.shooterPistonDown();
     talonSRXMotors.setShooterSpeed(1);
-    //talonSRXMotors.setSpeedFeeder(0.3);
-  
-    if(Timer.getFPGATimestamp() > feederdelay){
-      talonSRXMotors.setSpeedFeeder(0.4);
-      }
-  
+    talonSRXMotors.setSpeedFeeder(1);
 
   }
   // Called once the command ends or is interrupted.

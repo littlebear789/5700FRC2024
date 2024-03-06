@@ -28,11 +28,11 @@ public class ShooterPistonToggle extends Command {
   @Override
   public void execute() {
     if(state == 1){
-      shooter.shooterPistonUp();
-      System.out.println("Shooter Up");
-    }else if(state == -1){
       shooter.shooterPistonDown();
       System.out.println("Shooter Down");
+    }else if(state == -1){
+      shooter.shooterPistonUp();
+      System.out.println("Shooter Up");
     }
   }
 

@@ -12,25 +12,6 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootClose"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "FireCMD"
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "2NoteFar"

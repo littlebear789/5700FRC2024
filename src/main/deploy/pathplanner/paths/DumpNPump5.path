@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.522805617039081,
-        "y": 4.087056859828006
+        "x": 7.933089009035161,
+        "y": 4.515113030226061
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.8096494003174214,
-        "y": 3.9798726838198477
+        "x": 7.28807286186001,
+        "y": 5.204107551072246
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.7859976973515199,
-        "y": 4.385307915914978
+        "x": 5.484959541347655,
+        "y": 6.538118219093581
       },
       "prevControl": {
-        "x": 0.9034699308156253,
-        "y": 4.278925624782873
+        "x": 6.467143220000726,
+        "y": 6.464820929641859
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,25 +30,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [
-    {
-      "name": "New Event Marker",
-      "waypointRelativePos": 0,
-      "command": {
-        "type": "parallel",
-        "data": {
-          "commands": [
-            {
-              "type": "named",
-              "data": {
-                "name": "SmartAutoIntake"
-              }
-            }
-          ]
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 3.0,
@@ -57,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -59.349332042947196,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "DumpNPump",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": -46.33221985386956,
     "velocity": 0
   },
   "useDefaultConstraints": true

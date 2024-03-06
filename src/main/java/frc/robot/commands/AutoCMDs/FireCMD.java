@@ -36,8 +36,8 @@ public class FireCMD extends Command {
     killed = false;
     endTime = Timer.getFPGATimestamp() + duration;
     System.out.println("Fire");
-    
-
+    talonSRXMotors.setShooterSpeed(1);
+  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -57,6 +57,8 @@ public class FireCMD extends Command {
     talonSRXMotors.setShooterSpeed(0);
     talonSRXMotors.setSpeedFeeder(0);
     //shooter.shooterPistonDown();
+    SmartDashboard.putBoolean("Shooting", false);
+    SmartDashboard.putBoolean("Note Got", false);
   }
 
 

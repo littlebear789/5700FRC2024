@@ -21,7 +21,7 @@ public class IntakeDefaultCMD extends Command {
     this.intake = intake;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
+    addRequirements(talonSRXMotors,intake);
   }
 
   // Called when the command is initially scheduled.
@@ -39,22 +39,23 @@ public class IntakeDefaultCMD extends Command {
     if(talonSRXMotors.getFeederBeamBreak() && talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", true);
       SmartDashboard.putBoolean("Note Not Set", false);
-      talonSRXMotors.setSpeedFeeder(0);
+      //talonSRXMotors.setSpeedFeeder(0);
 
     }
     else if(talonSRXMotors.getFeederBeamBreakLow() && !talonSRXMotors.getFeederBeamBreak()){
       SmartDashboard.putBoolean("Note Not Set", true);
-      talonSRXMotors.setSpeedFeeder(0.5);
+      //talonSRXMotors.setSpeedFeeder(1);
     }
    else if(!talonSRXMotors.getFeederBeamBreakLow() && talonSRXMotors.getFeederBeamBreak()){
       SmartDashboard.putBoolean("Note Not Set", true);
-      talonSRXMotors.setSpeedFeeder(-0.35);
+      //talonSRXMotors.setSpeedFeeder(-0.24);
     }
     else{
       SmartDashboard.putBoolean("Note Got", false);
       SmartDashboard.putBoolean("Note Not Set", false);
-      talonSRXMotors.setSpeedFeeder(0);
+      //talonSRXMotors.setSpeedFeeder(0);
     }
+    
   }
 
 }

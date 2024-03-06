@@ -10,6 +10,7 @@ import frc.robot.subsystems.TalonSRXMotors;
 
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class ShootFar extends Command {
@@ -28,15 +29,17 @@ public class ShootFar extends Command {
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(talonSRXMotors,shooter);
   }
  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter.shooterPistonDown();
     killed = false;
     endTime = Timer.getFPGATimestamp() + duration;
     System.out.println("Shooter On");
+    SmartDashboard.putBoolean("Shooting", true);
     
 
   }
@@ -45,7 +48,7 @@ public class ShootFar extends Command {
   @Override
   public void execute() {
     talonSRXMotors.setShooterSpeed(1); 
-    shooter.shooterPistonUp();
+    shooter.shooterPistonDown();
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;
     }

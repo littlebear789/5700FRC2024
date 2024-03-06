@@ -40,7 +40,7 @@ public class ShooterFarCMD extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shooterPistonUp();
+    shooter.shooterPistonDown();
     talonSRXMotors.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);

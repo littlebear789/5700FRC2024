@@ -20,12 +20,12 @@ public class Shooter extends SubsystemBase {
 
   }
 
-  public void shooterPistonUp(){
+  public void shooterPistonDown(){
     this.shooter.set(DoubleSolenoid.Value.kForward);
     
   }
   
-  public void shooterPistonDown(){
+  public void shooterPistonUp(){
     this.shooter.set(DoubleSolenoid.Value.kReverse);
   }
 

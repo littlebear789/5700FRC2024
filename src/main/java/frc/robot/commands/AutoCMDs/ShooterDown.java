@@ -26,7 +26,7 @@ public class ShooterDown extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.shooterPistonUp();
+    shooter.shooterPistonDown();
 
 
   }

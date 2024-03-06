@@ -53,6 +53,31 @@
           "data": {
             "name": "SmartAutoIntake"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Middle-Speaker"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootClose"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "FireCMD"
+                }
+              }
+            ]
+          }
         }
       ]
     }
