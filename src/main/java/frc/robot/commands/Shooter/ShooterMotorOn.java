@@ -5,21 +5,21 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.TalonSRXMotors;
+import frc.robot.subsystems.Shooter;
 
 
 public class ShooterMotorOn extends Command {
 
-  private TalonSRXMotors talonSRXMotors;
+  private Shooter shooter;
   private final Boolean motor;
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterMotorOn(TalonSRXMotors talonSRXMotors, Boolean motor) {
+  public ShooterMotorOn(Shooter shooter, Boolean motor) {
     this.motor = motor;
-    this.talonSRXMotors = talonSRXMotors;
+    this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(shooter);
   }
  
   // Called when the command is initially scheduled.
@@ -33,11 +33,11 @@ public class ShooterMotorOn extends Command {
   public void execute() {
 
     if (motor){
-      talonSRXMotors.setShooterSpeed(1);
+      shooter.setShooterSpeed(1);
       
     }
     else{
-      talonSRXMotors.setShooterSpeed(0);
+      shooter.setShooterSpeed(0);
        
     }
       

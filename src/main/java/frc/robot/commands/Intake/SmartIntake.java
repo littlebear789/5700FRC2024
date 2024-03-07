@@ -51,12 +51,11 @@ public class SmartIntake extends Command {
       intake.intakeMotorSpeed(1);
       talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){
-      SmartDashboard.putBoolean("Note Not Set", true);
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(1);
+      talonSRXMotors.setSpeedFeeder(0.9);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(-0.24);
+      talonSRXMotors.setSpeedFeeder(-0.22);
     }else if(beamH && beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(0);

@@ -4,6 +4,9 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,6 +15,9 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
 
   private final DoubleSolenoid shooter = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,Constants.shooterUp, Constants.shooterDown);
+  private TalonSRX motor3 = new TalonSRX(Constants.motor3ID); //shooter motor
+  private TalonSRX motor4 = new TalonSRX(Constants.motor4ID); //shooter motor
+
 
   
   /** Creates a new Intake. */
@@ -32,6 +38,22 @@ public class Shooter extends SubsystemBase {
   public void shooterPistonToggle(){
     this.shooter.toggle();
   }
+
+  public void setSpeed1(double speed) {
+    motor3.set(ControlMode.PercentOutput,speed);
+    
+  }
+
+  public void setSpeed2(double speed) {
+    motor4.set(ControlMode.PercentOutput,speed);
+  }
+
+  public void setShooterSpeed(double speed){
+    motor3.set(ControlMode.PercentOutput,speed);
+    motor4.set(ControlMode.PercentOutput,speed);
+  }
+
+  
 
   @Override
   public void periodic() {

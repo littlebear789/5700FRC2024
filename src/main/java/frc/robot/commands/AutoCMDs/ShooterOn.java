@@ -5,25 +5,26 @@
 package frc.robot.commands.AutoCMDs;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.TalonSRXMotors;
 
 
 
 public class ShooterOn extends Command {
 
-  private TalonSRXMotors talonSRXMotors;
+  private Shooter shooter;
 
 
 
 
 
   /** Creates a new SetTalonSpeed. */
-  public ShooterOn(TalonSRXMotors talonSRXMotors) {
+  public ShooterOn(Shooter shooter) {
 
-    this.talonSRXMotors = talonSRXMotors;
+    this.shooter = shooter;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(shooter);
   }
  
   // Called when the command is initially scheduled.
@@ -37,7 +38,7 @@ public class ShooterOn extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSRXMotors.setShooterSpeed(0.7); 
+    shooter.setShooterSpeed(0.7); 
 
   }
   @Override

@@ -46,7 +46,7 @@ public class ShootClose extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    talonSRXMotors.setShooterSpeed(1); 
+    shooter.setShooterSpeed(1); 
     shooter.shooterPistonUp();
     if(Timer.getFPGATimestamp() > endTime){
       killed = true;

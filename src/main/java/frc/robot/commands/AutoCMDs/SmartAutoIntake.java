@@ -17,12 +17,12 @@ public class SmartAutoIntake extends Command {
   private boolean killed = false;
   private boolean beamH = false;
   private boolean beamL = false;
-  private boolean trippedBL;
+  private boolean clearBL;
   private boolean lastStatus;
 
 
   /** Creates a new IntakeCMD. */
-  public SmartAutoIntake (Intake intake, TalonSRXMotors talonSRXMotors) {
+  public SmartAutoIntake(Intake intake, TalonSRXMotors talonSRXMotors) {
     this.intake = intake;
     this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,7 +36,7 @@ public class SmartAutoIntake extends Command {
     System.out.println("Intake Down");
     SmartDashboard.putBoolean("Intaking", true);
     killed = false;
-
+    clearBL=false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,25 +44,34 @@ public class SmartAutoIntake extends Command {
   public void execute() {
     beamH = talonSRXMotors.getFeederBeamBreak();
     beamL = talonSRXMotors.getFeederBeamBreakLow();
-    trippedBL = beamL && !lastStatus;
-    lastStatus = beamL;
     if(!beamH && !beamL){
       //intake.intakePistonDown();
       intake.intakeMotorSpeed(1);
-      talonSRXMotors.setSpeedFeeder(0.8);
+      talonSRXMotors.setSpeedFeeder(1);
     } else if(!beamH && beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(0.4);
+      talonSRXMotors.setSpeedFeeder(0.9);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(-0.24);
-    }else if(beamH && beamL ){
+      talonSRXMotors.setSpeedFeeder(-0.3);
+      clearBL = true;
+    }
+    else if(beamH && beamL && clearBL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(0);
       SmartDashboard.putBoolean("Note Got", true);
       SmartDashboard.putBoolean("Intaking", false);
+      SmartDashboard.putBoolean("Note Not Set", false);
       killed = true;
     }
+    else if(beamH && beamL){
+      intake.intakeMotorSpeed(0);
+      talonSRXMotors.setSpeedFeeder(0.4);
+      SmartDashboard.putBoolean("Note Got", true);
+      SmartDashboard.putBoolean("Intaking", false);
+      SmartDashboard.putBoolean("Note Not Set", false);
+    }
+
       
   }
 
@@ -71,6 +80,7 @@ public class SmartAutoIntake extends Command {
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("Intaking", false);
+    SmartDashboard.putBoolean("Note Not Set", false);
   }
 
   // Returns true when the command should end.

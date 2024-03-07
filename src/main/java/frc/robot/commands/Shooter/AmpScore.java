@@ -26,7 +26,7 @@ public class AmpScore extends Command {
     this.shooter = shooter;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(talonSRXMotors,shooter);
   }
  
   // Called when the command is initially scheduled.
@@ -42,7 +42,7 @@ public class AmpScore extends Command {
   @Override
   public void execute() {
     //shooter.shooterPistonDown();
-    talonSRXMotors.setShooterSpeed(1);
+    shooter.setShooterSpeed(1);
     talonSRXMotors.setSpeedFeeder(1);
 
   }
@@ -50,7 +50,7 @@ public class AmpScore extends Command {
   @Override
   public void end(boolean interrupted) {
     System.out.println("AMP Release");
-    talonSRXMotors.setShooterSpeed(0);
+    shooter.setShooterSpeed(0);
     talonSRXMotors.setSpeedFeeder(0);
     SmartDashboard.putBoolean("Shooting", false);
     SmartDashboard.putBoolean("Shot", false);

@@ -12,9 +12,21 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "test"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "SmartAutoIntakeC"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "test2"
           }
         }
       ]

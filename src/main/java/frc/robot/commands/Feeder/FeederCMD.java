@@ -45,6 +45,7 @@ public class FeederCMD extends Command {
   @Override
   public void end(boolean interrupted) {
     System.out.println("feeder off");
+    talonSRXMotors.setSpeedFeeder(0);
   }
 
   // Returns true when the command should end.

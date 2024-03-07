@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.*;
 import frc.robot.commands.AutoCMDs.*;
 import frc.robot.commands.Feeder.FeederCMD;
+import frc.robot.commands.Feeder.FeederDefaultCMD;
 import frc.robot.commands.Intake.*;
 import frc.robot.commands.Shooter.*;
 import frc.robot.subsystems.*;
@@ -73,8 +74,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("ShootClose", new ShootClose(talonSRXMotors,shooter));
         NamedCommands.registerCommand("FireCMD", new FireCMD(talonSRXMotors,shooter));
         NamedCommands.registerCommand("SmartAutoIntake", new SmartAutoIntake(intake,talonSRXMotors));
-        NamedCommands.registerCommand("SmartAutoIntakeC", new SmartAutoIntakeC(intake,talonSRXMotors));
-        NamedCommands.registerCommand("SmartAutoIntakeTest", new SmartAutoIntakeTest(intake,talonSRXMotors));
+        NamedCommands.registerCommand("SmartAutoIntakeC", new SmartAutoIntakeOld(intake,talonSRXMotors));
 
        
 
@@ -150,8 +150,10 @@ public class RobotContainer {
     }
 
     private void configureSubsystemDefaults() {
-        intake.setDefaultCommand(new IntakeDefaultCMD(talonSRXMotors,intake));
-        talonSRXMotors.setDefaultCommand(new ShooterDefaultCMD(talonSRXMotors,shooter));
+        intake.setDefaultCommand(new IntakeDefaultCMD(intake));
+        shooter.setDefaultCommand(new ShooterDefaultCMD(shooter));
+        talonSRXMotors.setDefaultCommand(new FeederDefaultCMD(talonSRXMotors));
+
     
     }
 
@@ -168,18 +170,17 @@ public class RobotContainer {
                 led.rainbow();
               
             }
-            else if(SmartDashboard.getBoolean("Note Not Set", false)){
-                led.setAll(Color.kRed);
-            }
             else if (SmartDashboard.getBoolean("Intaking", false)) {
                 led.setAllBlink(Color.kRed, 0.2);
-              
             }
-            
             else if(SmartDashboard.getBoolean("Note Got", false)){
                 led.setAll(Color.kGreen);
                 //System.out.println("Solid Green");
             }
+            else if(SmartDashboard.getBoolean("Note Not Set", false)){
+                led.setAll(Color.kRed);
+            }         
+            
             else {
             led.setAll(Color.kCyan);
             //System.out.println("Cyan");

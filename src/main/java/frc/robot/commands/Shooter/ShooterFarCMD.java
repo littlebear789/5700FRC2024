@@ -41,7 +41,7 @@ public class ShooterFarCMD extends Command {
   @Override
   public void execute() {
     shooter.shooterPistonDown();
-    talonSRXMotors.setShooterSpeed(1);
+    shooter.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);
     }

@@ -27,7 +27,7 @@ public class ShooterCloseCMD extends Command {
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors);
+    addRequirements(talonSRXMotors,shooter);
   }
  
   // Called when the command is initially scheduled.
@@ -43,7 +43,7 @@ public class ShooterCloseCMD extends Command {
   @Override
   public void execute() {
     shooter.shooterPistonUp();
-    talonSRXMotors.setShooterSpeed(1);
+    shooter.setShooterSpeed(1);
     if(Timer.getFPGATimestamp() > feederdelay){
     talonSRXMotors.setSpeedFeeder(1);
     }

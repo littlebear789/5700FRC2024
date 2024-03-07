@@ -13,48 +13,29 @@ import frc.robot.subsystems.TalonSRXMotors;
 
 public class IntakeDefaultCMD extends Command {
   private Intake intake;
-  private TalonSRXMotors talonSRXMotors;
 
 
   /** Creates a new IntakeCMD. */
-  public IntakeDefaultCMD(TalonSRXMotors talonSRXMotors, Intake intake) {
+  public IntakeDefaultCMD(Intake intake) {
     this.intake = intake;
-    this.talonSRXMotors = talonSRXMotors;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(talonSRXMotors,intake);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     //intake.intakePistonDown();
-    intake.intakeMotorSpeed(0);
+    
     System.out.println("Intake Default");
     
   }
 
   // Called every time the scheduler runs while the command is scheduled.
+
   @Override
   public void execute() {
-    if(talonSRXMotors.getFeederBeamBreak() && talonSRXMotors.getFeederBeamBreakLow()){
-      SmartDashboard.putBoolean("Note Got", true);
-      SmartDashboard.putBoolean("Note Not Set", false);
-      //talonSRXMotors.setSpeedFeeder(0);
-
-    }
-    else if(talonSRXMotors.getFeederBeamBreakLow() && !talonSRXMotors.getFeederBeamBreak()){
-      SmartDashboard.putBoolean("Note Not Set", true);
-      //talonSRXMotors.setSpeedFeeder(1);
-    }
-   else if(!talonSRXMotors.getFeederBeamBreakLow() && talonSRXMotors.getFeederBeamBreak()){
-      SmartDashboard.putBoolean("Note Not Set", true);
-      //talonSRXMotors.setSpeedFeeder(-0.24);
-    }
-    else{
-      SmartDashboard.putBoolean("Note Got", false);
-      SmartDashboard.putBoolean("Note Not Set", false);
-      //talonSRXMotors.setSpeedFeeder(0);
-    }
+    intake.intakeMotorSpeed(0);
     
   }
 
