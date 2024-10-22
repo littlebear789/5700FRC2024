@@ -36,7 +36,7 @@ public class ShooterCloseCMD extends Command {
     killed = false;
     System.out.println("Shooting Speaker");
     SmartDashboard.putBoolean("Shooting", true);
-    feederdelay = Timer.getFPGATimestamp() + 0.65;
+    feederdelay = Timer.getFPGATimestamp() + 0.85;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -7,12 +7,10 @@ package frc.robot.commands.Feeder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.TalonSRXMotors;
 
 
 public class FeederDefaultCMD extends Command {
-  private Intake intake;
   private TalonSRXMotors talonSRXMotors;
 
 
@@ -37,22 +35,22 @@ public class FeederDefaultCMD extends Command {
     if(talonSRXMotors.getFeederBeamBreak() && talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", true);
       SmartDashboard.putBoolean("Note Not Set", false);
-      talonSRXMotors.setSpeedFeeder(0);
+      //talonSRXMotors.setSpeedFeeder(0);
     }
     else if(talonSRXMotors.getFeederBeamBreakLow() && !talonSRXMotors.getFeederBeamBreak()){
       SmartDashboard.putBoolean("Note Not Set", true);
       SmartDashboard.putBoolean("Note Got", false);
-      talonSRXMotors.setSpeedFeeder(0.9);
+      //talonSRXMotors.setSpeedFeeder(0.9);
     }
    else if(!talonSRXMotors.getFeederBeamBreakLow() && talonSRXMotors.getFeederBeamBreak()){
       SmartDashboard.putBoolean("Note Not Set", true);
       SmartDashboard.putBoolean("Note Got", false);
-      talonSRXMotors.setSpeedFeeder(-0.22);
+      //talonSRXMotors.setSpeedFeeder(-0.22);
     }
     else if(!talonSRXMotors.getFeederBeamBreak() && !talonSRXMotors.getFeederBeamBreakLow()){
       SmartDashboard.putBoolean("Note Got", false);
       SmartDashboard.putBoolean("Note Not Set", false);
-      talonSRXMotors.setSpeedFeeder(0);
+      //talonSRXMotors.setSpeedFeeder(0);
     }
     else{
       SmartDashboard.putBoolean("Note Got", false);

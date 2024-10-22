@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.7573569432816848,
-        "y": 4.398265453240678
+        "x": 0.984505969011938,
+        "y": 4.440483062784308
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.3356179807202389,
-        "y": 4.163105220543505
+        "x": 1.5627670064504924,
+        "y": 4.205322830087135
       },
       "isLocked": false,
       "linkedName": null
@@ -75,7 +75,7 @@
   "reversed": false,
   "folder": "TwoNoteRSide",
   "previewStartingState": {
-    "rotation": -58.90999999999997,
+    "rotation": -44.060809054264425,
     "velocity": 0
   },
   "useDefaultConstraints": true

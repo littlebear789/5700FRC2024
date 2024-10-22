@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 2.0,
-      "y": 5.0
+      "x": 2,
+      "y": 2
     },
     "rotation": 0
   },
@@ -12,21 +12,9 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "test"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "SmartAutoIntake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "test2"
           }
         }
       ]

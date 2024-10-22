@@ -23,7 +23,7 @@ public class FireCMD extends Command {
 
   /** Creates a new SetTalonSpeed. */
   public FireCMD(TalonSRXMotors talonSRXMotors, Shooter shooter) {
-    this.duration = 0.5;
+    this.duration = 0.6;
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.

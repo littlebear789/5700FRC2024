@@ -17,7 +17,6 @@ public class SmartIntake extends Command {
   private boolean killed = false;
   private boolean beamH = false;
   private boolean beamL = false;
-  private boolean trippedBL;
   private boolean lastStatus;
 
 
@@ -44,8 +43,6 @@ public class SmartIntake extends Command {
   public void execute() {
     beamH = talonSRXMotors.getFeederBeamBreak();
     beamL = talonSRXMotors.getFeederBeamBreakLow();
-    trippedBL = beamL && !lastStatus;
-    lastStatus = beamL;
     if(!beamH && !beamL){
       //intake.intakePistonUp();
       intake.intakeMotorSpeed(1);
@@ -55,7 +52,7 @@ public class SmartIntake extends Command {
       talonSRXMotors.setSpeedFeeder(0.9);
     } else if(beamH && !beamL){
       intake.intakeMotorSpeed(0);
-      talonSRXMotors.setSpeedFeeder(-0.22);
+      talonSRXMotors.setSpeedFeeder(-0.25);
     }else if(beamH && beamL){
       intake.intakeMotorSpeed(0);
       talonSRXMotors.setSpeedFeeder(0);

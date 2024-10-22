@@ -6,7 +6,6 @@ package frc.robot.commands.AutoCMDs;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.TalonSRXMotors;
 
 
 

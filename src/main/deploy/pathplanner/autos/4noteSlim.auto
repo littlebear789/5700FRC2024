@@ -31,6 +31,12 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "MoveIntake"
@@ -46,12 +52,6 @@
           "type": "path",
           "data": {
             "pathName": "2nd3rdS"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "SmartAutoIntake"
           }
         },
         {

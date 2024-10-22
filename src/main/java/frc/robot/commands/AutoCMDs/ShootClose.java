@@ -25,7 +25,7 @@ public class ShootClose extends Command {
 
   /** Creates a new SetTalonSpeed. */
   public ShootClose(TalonSRXMotors talonSRXMotors,Shooter shooter) {
-    this.duration = 0.7;
+    this.duration = 0.86;
     this.talonSRXMotors = talonSRXMotors;
     this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
